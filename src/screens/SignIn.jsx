@@ -1,26 +1,65 @@
 import React from 'react'
 import '../styles/SignIn.css'
+import logo from '../assets/logo.png'
+import { FaGoogle } from "react-icons/fa";
+import { FaEye } from "react-icons/fa6";
 function SignIn() {
+    
  return (
   <div className='container'>
    <div className='login-box'>
-    <h2>Sign In</h2>
-    <form>
-     <div className='input-group'>
-      <label htmlFor='username'>Username:</label>
-      <input type='text' id='username' name='username' placeholder='Enter your username' />
-     </div>
-     <div className='input-group'>
-      <label htmlFor='password'>Password:</label>
-      <input type='password' id='password' name='password' placeholder='Enter your password' />
-     </div>
-     <button type='submit' className='btn-login'>
-      Login
-     </button>
-    </form>
-    <div className='separator'>or</div>
-    <button className='btn-google-login'>Login with Google</button>
+
+    <div className='logo-box'>
+        <img src={logo}  className='logo' alt="" />
+    </div>
+    <div className='text-box'>
+     <h2>Sign In</h2>
+   <p >Continue to Business Shelter</p>
    </div>
+    <form>
+        <div className='form-box card'>
+        <div className='input-group input-wrapper'>
+        <input type='text' id='input' required ></input>
+      <label 
+             for='input' 
+             className='placeholder'>
+        Email
+      </label>
+          </div>
+          <div className='input-group input-wrapper '> 
+          <input type='password' id='input' required ></input>
+          
+      <label 
+             for='input' 
+             className='placeholder'>
+        Password
+      
+     
+      </label>
+    
+      
+     <a  href=""   className='fa-eye'><FaEye /></a> 
+          </div>
+          <div className='booton-box'>
+          <button type='submit' className='btn-login'>
+          Login
+          </button>
+       </div>
+       </div>
+    </form>
+    
+    <div className='google-btn-box'>
+    <button className='btn-google-login'> <FaGoogle className='btn-logo'/>   Login with Google</button>
+    </div>
+    <div className='Forgot_pass'>
+    <a href="">Forgot your password?</a>
+    </div>
+   
+   <div className='ragister'>
+   <span className='text-muted '>Don't have an account?</span> <a href="">Register</a>
+   </div>
+   </div>
+  
   </div>
  )
 }

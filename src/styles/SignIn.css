@@ -1,27 +1,88 @@
-/* App.css */
+*{
+  margin: 0px;
+  padding: 0px;
+}
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  padding: 0px !important;
+    padding-top: 20px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+   
 }
 
+
+
 .login-box {
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 20px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
   width: 90%;
   max-width: 400px;
   padding: 20px;
-  border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #fff;
 }
 
-h2 {
+.text-box {
+  /* font-family: 'Poppins' !important; */
+  margin-top: 20px;
   text-align: center;
 }
 
+.form-box{
+margin-top: 25px;
+}
+
+.inputs{
+  
+  display: block;
+  width: 93%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  
+}
+
+.fa-eye{
+  position: absolute;
+  right: 15px;
+}
+.container{
+ 
+  padding-top: 20px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    
+}
+
+.login-box{
+  position: relative;
+    width: 370px;
+    padding: 15px;
+    z-index: 5;
+    overflow: hidden !important;
+    box-sizing: border-box;
+}
 .input-group {
+ box-sizing: border-box;
   margin-bottom: 15px;
 }
+.input-field{
+  display: flex;
+  justify-content: center;
+}
+
+
 
 label {
   display: block;
@@ -34,17 +95,20 @@ input {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 3px;
+  height: 25px;
 }
 
 .btn-login {
-  width: 100%;
+ 
+  width: 20%;
   padding: 10px;
   font-size: 16px;
-  background-color: #007bff;
+  background-color: black;
   color: #fff;
   border: none;
   border-radius: 3px;
   cursor: pointer;
+  box-shadow: 5px 10px 5px lightgrey
 }
 
 .separator {
@@ -53,12 +117,113 @@ input {
 }
 
 .btn-google-login {
-  width: 100%;
+  vertical-align: middle;
+  text-align: center;
+  width: 60%;
   padding: 10px;
-  font-size: 16px;
-  background-color: #db4437;
+  font-size: 14px;
+  font-weight: 400;
+  background-color: black;
   color: #fff;
   border: none;
   border-radius: 3px;
   cursor: pointer;
+  box-shadow: 5px 10px 5px lightgrey
+  
+}
+.btn-logo{
+  vertical-align: middle;
+  height: 20px;
+    margin-bottom: 2px;
+    margin-right: 6px;
+}
+.logo-box{
+   display: flex;
+   justify-content: center;
+  
+}
+.logo{
+  margin-left: 14px;
+  vertical-align: middle;
+    border-style: none;
+  height: 90px;
+  
+}
+.booton-box{
+  margin-top: 50px;
+  display: flex;
+  justify-content: end;
+}
+
+.google-btn-box{
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+a {
+color: black;
+  text-decoration: none;
+  background-color: transparent;
+  
+}
+a:hover{
+  text-decoration-line: underline;
+}
+.Forgot_pass{
+  margin-top: 20px;
+  text-align: center;
+  font-size: 13px;
+}
+.ragister {
+  margin-top: 15px;
+  font-size: 13px;
+  text-align: center;
+}
+.text-muted {
+ 
+  color: #6c757d !important;
+}
+.booton{
+  box-shadow: 10px 10px 5px lightblue;
+}
+
+
+
+
+
+
+
+
+
+
+.input-wrapper {
+  --padding: 16px;
+  --focus-color: black;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+input {
+  padding: var(--padding);
+ outline: none;
+}
+.placeholder {
+  position: absolute;
+  background-color: white;
+  color: gray;
+  left: var(--padding);
+  padding: 0 4px;
+  transition: all 0.2s ease-in;
+}
+
+input:is(:focus, :valid) {
+  border: 2px solid var(--focus-color);
+}
+
+input:is(:focus, :valid) + .placeholder {
+  transform: translatey(calc(-1 * var(--padding) - 12px));
+  font-size: 14px;
+  color: var(--focus-color);
 }
