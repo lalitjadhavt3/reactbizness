@@ -1,16 +1,13 @@
-*{
+* {
   margin: 0px;
   padding: 0px;
 }
 .container {
   padding: 0px !important;
-    padding-top: 20px !important;
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-   
+  padding-top: 20px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
 }
-
-
 
 .login-box {
   margin-left: auto;
@@ -31,12 +28,11 @@
   text-align: center;
 }
 
-.form-box{
-margin-top: 25px;
+.form-box {
+  margin-top: 25px;
 }
 
-.inputs{
-  
+.inputs {
   display: block;
   width: 93%;
   height: calc(1.5em + 0.75rem + 2px);
@@ -49,40 +45,35 @@ margin-top: 25px;
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
-  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-  
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.fa-eye{
+.fa-eye {
   position: absolute;
   right: 15px;
 }
-.container{
- 
+.container {
   padding-top: 20px !important;
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-    
+  padding-left: 20px !important;
+  padding-right: 20px !important;
 }
 
-.login-box{
+.login-box {
   position: relative;
-    width: 370px;
-    padding: 15px;
-    z-index: 5;
-    overflow: hidden !important;
-    box-sizing: border-box;
+  width: 370px;
+  padding: 15px;
+  z-index: 5;
+  overflow: hidden !important;
+  box-sizing: border-box;
 }
 .input-group {
- box-sizing: border-box;
+  box-sizing: border-box;
   margin-bottom: 15px;
 }
-.input-field{
+.input-field {
   display: flex;
   justify-content: center;
 }
-
-
 
 label {
   display: block;
@@ -99,7 +90,6 @@ input {
 }
 
 .btn-login {
- 
   width: 20%;
   padding: 10px;
   font-size: 16px;
@@ -108,69 +98,44 @@ input {
   border: none;
   border-radius: 3px;
   cursor: pointer;
-  box-shadow: 5px 10px 5px lightgrey
+  box-shadow: 5px 10px 5px lightgrey;
 }
 
 .separator {
   text-align: center;
   margin: 15px 0;
 }
-
-.btn-google-login {
-  vertical-align: middle;
-  text-align: center;
-  width: 60%;
-  padding: 10px;
-  font-size: 14px;
-  font-weight: 400;
-  background-color: black;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  box-shadow: 5px 10px 5px lightgrey
-  
+.logo-box {
+  display: flex;
+  justify-content: center;
 }
-.btn-logo{
-  vertical-align: middle;
-  height: 20px;
-    margin-bottom: 2px;
-    margin-right: 6px;
-}
-.logo-box{
-   display: flex;
-   justify-content: center;
-  
-}
-.logo{
+.logo {
   margin-left: 14px;
   vertical-align: middle;
-    border-style: none;
+  border-style: none;
   height: 90px;
-  
 }
-.booton-box{
+.button-box {
   margin-top: 50px;
   display: flex;
   justify-content: end;
 }
 
-.google-btn-box{
+.google-btn-box {
   margin-top: 30px;
   display: flex;
   justify-content: center;
 }
 
 a {
-color: black;
+  color: black;
   text-decoration: none;
   background-color: transparent;
-  
 }
-a:hover{
+a:hover {
   text-decoration-line: underline;
 }
-.Forgot_pass{
+.Forgot_pass {
   margin-top: 20px;
   text-align: center;
   font-size: 13px;
@@ -181,20 +146,8 @@ a:hover{
   text-align: center;
 }
 .text-muted {
- 
   color: #6c757d !important;
 }
-.booton{
-  box-shadow: 10px 10px 5px lightblue;
-}
-
-
-
-
-
-
-
-
 
 
 .input-wrapper {
@@ -207,7 +160,7 @@ a:hover{
 
 input {
   padding: var(--padding);
- outline: none;
+  outline: none;
 }
 .placeholder {
   position: absolute;

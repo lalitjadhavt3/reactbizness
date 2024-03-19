@@ -1,0 +1,27 @@
+.btn {
+    vertical-align: middle;
+    text-align: center;
+  
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    background-color: black;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    box-shadow: 5px 10px 5px lightgrey
+    
+  }
+  .btn-logo{
+    vertical-align: middle;
+    height: 20px;
+      margin-bottom: 2px;
+      margin-right: 6px;
+  }
+
+  .google-btn-box{
+    /* margin-top: 30px; */
+    display: flex;
+    justify-content: center;
+  }
