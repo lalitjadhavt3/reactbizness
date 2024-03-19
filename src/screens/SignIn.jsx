@@ -3,6 +3,7 @@ import '../styles/SignIn.css'
 import logo from '../assets/logo.png'
 import { FaGoogle } from "react-icons/fa";
 import { FaEye } from "react-icons/fa6";
+import Buttons from '../Components/Buttons'
 function SignIn() {
     
  return (
@@ -40,17 +41,21 @@ function SignIn() {
       
      <a  href=""   className='fa-eye'><FaEye /></a> 
           </div>
-          <div className='booton-box'>
-          <button type='submit' className='btn-login'>
-          Login
-          </button>
-       </div>
+
+
+          <div className='button-box'>
+          <Buttons>Login</Buttons>
+           </div>
+           
+
+
        </div>
     </form>
     
-    <div className='google-btn-box'>
-    <button className='btn-google-login'> <FaGoogle className='btn-logo'/>   Login with Google</button>
-    </div>
+    {/* <div className='google-btn-box'> */}
+    {/* <button className='btn-google-login'> <FaGoogle className='btn-logo'/> Login with Google</button> */}
+    <Buttons logo={<FaGoogle />}>Login with Google</Buttons>
+    {/* </div> */}
     <div className='Forgot_pass'>
     <a href="">Forgot your password?</a>
     </div>
