@@ -12,8 +12,8 @@ function SignIn() {
           <img src={logo} className="logo" alt="" />
         </div>
         <div className="text-box">
-          <h2>Sign In</h2>
-          <p>Continue to Business Shelter</p>
+          <h1>Sign In</h1>
+          <h3 className="alllables">Continue to Business Shelter</h3>
         </div>
         <form>
           <div className="form-box card">
@@ -44,12 +44,12 @@ function SignIn() {
         <Buttons logo={<FaGoogle />}>Login with Google</Buttons>
 
         <div className="Forgot_pass">
-          <a href="">Forgot your password?</a>
+          <a href="/forgot">Forgot your password?</a>
         </div>
 
         <div className="ragister">
           <span className="text-muted ">Don't have an account?</span>{" "}
-          <a href="">Register</a>
+          <a href="/register">Register</a>
         </div>
       </div>
     </div>

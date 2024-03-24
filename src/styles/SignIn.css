@@ -32,7 +32,7 @@
   margin-top: 25px;
 }
 
-.inputs {
+/* .inputs {
   display: block;
   width: 93%;
   height: calc(1.5em + 0.75rem + 2px);
@@ -46,7 +46,7 @@
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
+} */
 
 .fa-eye {
   position: absolute;
@@ -165,7 +165,7 @@ input {
 .placeholder {
   position: absolute;
   background-color: white;
-  color: gray;
+  color: black;
   left: var(--padding);
   padding: 0 4px;
   transition: all 0.2s ease-in;
@@ -179,4 +179,18 @@ input:is(:focus, :valid) + .placeholder {
   transform: translatey(calc(-1 * var(--padding) - 12px));
   font-size: 14px;
   color: var(--focus-color);
+}
+
+
+h1{
+  font-size: 20px !important;
+  margin-bottom: 0.5rem;
+  font-weight: 350;
+  line-height: 1.2;
+}
+.alllables{
+  font-size: 13px !important;
+  margin-bottom: 0.5rem;
+  font-weight: 350;
+  line-height: 1.2;
 }
