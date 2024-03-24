@@ -1,0 +1,41 @@
+.register-box {
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+
+  .logo-box {
+    display: flex;
+    justify-content: center;
+  }
+
+  select {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    height: 60px;
+    padding: var(--padding);
+    outline: none;
+    transition: border-color 0.3s ease-out;
+    
+    padding: var(--padding);
+    outline: none;
+  }
+
+  select:is(:focus,:invalid) + .placeholder {
+    transform: translateY(calc(-1 * var(--padding) - 12px));
+    font-size: 14px;
+    color: var(--focus-color);
+  }
+  
+ 
+  
