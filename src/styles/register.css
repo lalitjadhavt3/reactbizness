@@ -1,11 +1,11 @@
-.register-box {
+ .register-box {
     margin-left: auto;
     margin-right: auto;
     padding-top: 20px !important;
     padding-left: 20px !important;
     padding-right: 20px !important;
-    width: 90%;
-    max-width: 400px;
+    width: 45%;
+    max-width: 350px;
     padding: 20px;
     border-radius: 5px;
     background-color: #fff;
@@ -36,6 +36,20 @@
     font-size: 14px;
     color: var(--focus-color);
   }
+
+  select:is(:focus, :valid) {
+    border: 2px solid var(--focus-color);
+}
+.register{
+  margin-left: 35px;
+}
   
  
   
+
+
+
+
+
+
+   
