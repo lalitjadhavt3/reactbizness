@@ -1,4 +1,3 @@
-// import React from "react";
 import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import Buttons from '../Components/Buttons'
@@ -7,10 +6,17 @@ import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 
 const Forgot_password = () => {
-  const [value, setValue] = useState();
+  const [number, setNumber] = useState("");
+ 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+   console.log(number);
+   alert("OTP Send Successfully on this Number"+ number)  
+  };
+
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="container">
           <div className="login-box">
             <div className="logo-box">
@@ -23,15 +29,15 @@ const Forgot_password = () => {
             <div className="d-flex">
               <PhoneInput
                 placeholder="Enter phone number"
-                value={value}
-                onChange={setValue}
+                value={number}
+                onChange={(value) => setNumber(value)}
               />
             </div>
             <div className="button-box">
-<Buttons>Send OTP</Buttons>
-</div>
+              <Buttons>Send OTP</Buttons>
+            </div>
             <div className="ragister">
-              <span className="text-muted ">Back to</span>{" "}
+              <span className="text-muted">Back to</span>{" "}
               <a href="/signin">Log in</a>
             </div>
           </div>
