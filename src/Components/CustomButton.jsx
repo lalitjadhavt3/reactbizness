@@ -1,20 +1,47 @@
 import React from 'react'
 
 import '../styles/button.css'
-const CustomButton = ({btnText, logoIcon, iconPosition}) => {
+import {Button} from '@mui/material'
+const CustomButton = ({btnText, logoIcon, iconPosition, btnStyle}) => {
  return (
-  <div className='btn-box'>
+  <div className='btn-box' style={btnStyle}>
    {iconPosition == 'start' && (
-    <button className='btn'>
+    <Button
+     variant='contained'
+     className='btnStyles'
+     onClick={() => {
+      console.log('clicked')
+     }}
+     type='button'
+    >
      {logoIcon && <span className='btn-logo'>{logoIcon}</span>}
      {btnText}
-    </button>
+    </Button>
    )}
    {iconPosition == 'end' && (
-    <button className='btn'>
+    <Button
+     variant='contained'
+     className='btn'
+     onClick={() => {
+      console.log('clicked')
+     }}
+     type='button'
+    >
      {btnText}
      {logoIcon && <span className='btn-logo'>{logoIcon}</span>}
-    </button>
+    </Button>
+   )}
+   {iconPosition == '' && (
+    <Button
+     variant='contained'
+     className='btn'
+     onClick={() => {
+      console.log('clicked')
+     }}
+     type='button'
+    >
+     {btnText}
+    </Button>
    )}
   </div>
  )
