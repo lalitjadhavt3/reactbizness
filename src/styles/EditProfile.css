@@ -1,0 +1,199 @@
+  .container {
+    padding: 20px !important;
+
+  }
+  
+  .profilebox {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  .profilebox-header{
+    background-color:#17a2b8;
+    display: flex;
+    flex-direction: row;
+    padding: 4%;
+    align-items: center;
+    color: white;
+    border-radius: 5px;
+  }
+  .profileinfo{
+    margin-left: 5%
+  }
+  .profileActiveText{
+    font-size: 12px;
+    color:rgba(255,255,255,.5)!important
+  }
+  .profileImg{
+    width: 50px;
+    height: 50px;
+    border-radius: '5%';
+    
+    
+  }
+  
+  .text-box {
+    /* font-family: 'Poppins' !important; */
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .form-box {
+    margin-top: 25px;
+  }
+  
+  .inputClass {
+   
+    width: 100%;
+    
+    
+  } 
+  
+  .fa-eye {
+    position: absolute;
+    right: 15px;
+  }
+  .container {
+    padding-top: 20px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  
+  
+  .input-group {
+    box-sizing: border-box;
+    margin-bottom: 15px;
+  }
+  .input-field {
+    display: flex;
+    justify-content: center;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    height: 25px;
+  }
+  
+  .btn-login {
+    width: 20%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: black;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    box-shadow: 5px 10px 5px lightgrey;
+  }
+  
+  .separator {
+    text-align: center;
+    margin: 15px 0;
+  }
+  .logo-box {
+    display: flex;
+    justify-content: center;
+  }
+  .logo {
+    margin-left: 14px;
+    vertical-align: middle;
+    border-style: none;
+    height: 90px;
+  }
+  .button-box {
+    margin-top: 50px;
+    display: flex;
+    justify-content: end;
+  }
+  
+  .google-btn-box {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  a {
+    color: black;
+    text-decoration: none;
+    background-color: transparent;
+  }
+  a:hover {
+    text-decoration-line: underline;
+  }
+  .Forgot_pass {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 13px;
+  }
+  .ragister {
+    margin-top: 15px;
+    font-size: 13px;
+    text-align: center;
+  }
+  .text-muted {
+    color: #6c757d !important;
+  }
+  
+  
+  .input-wrapper {
+    --padding: 16px;
+    --focus-color: black;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  input {
+    padding: var(--padding);
+    outline: none;
+  }
+  .placeholder {
+    position: absolute;
+    background-color: white;
+    color: black;
+    left: var(--padding);
+    padding: 0 4px;
+    transition: all 0.2s ease-in;
+  }
+  .profileTitle{
+    font-size: 18px!important;
+    font-weight: 600;
+  }
+  input:is(:focus, :valid) {
+    border: 2px solid var(--focus-color);
+  }
+  
+  input:is(:focus, :valid) + .placeholder {
+    transform: translatey(calc(-1 * var(--padding) - 12px));
+    font-size: 14px;
+    color: var(--focus-color);
+  }
+  .formControl{
+    margin-top: 5%!important;
+    width: 100%;
+  }
+  
+  h1{
+    margin-bottom: 0.5rem;
+    font-weight: 350;
+    line-height: 0.5;
+  }
+  .alllables{
+    font-size: 13px !important;
+    margin-bottom: 0.5rem;
+    font-weight: 350;
+    line-height: 1.2;
+  }
