@@ -8,3 +8,12 @@ body{
   font-style: normal;
   line-height: 1.2;
 }
+.MuiFormLabel-root.Mui-focused {
+  color: black !important;
+  font-family: 'Poppins';
+}
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: black !important;
+  font-family: 'Poppins';
+}
+
