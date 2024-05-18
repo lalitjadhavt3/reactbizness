@@ -5,6 +5,7 @@ import NotFound from '../screens/NotFound'
 import SignIn from '../screens/SignIn'
 import Register from '../screens/Register'
 import Forgot_password from '../screens/Forgot_password'
+import EditProfile from '../screens/EditProfile'
 const NavigationRouter = () => {
  return (
   <Router>
@@ -13,7 +14,8 @@ const NavigationRouter = () => {
     <Route path='*' element={<NotFound />} />
     <Route path='/signin' element={<SignIn />} />
     <Route path='/register' element={<Register />} />
-    <Route path='/forgot' element={<Forgot_password />} />
+    <Route path='/forgotPassword' element={<Forgot_password />} />
+    <Route path='/editProfile/:id' element={<EditProfile />} />
    </Routes>
   </Router>
  )
