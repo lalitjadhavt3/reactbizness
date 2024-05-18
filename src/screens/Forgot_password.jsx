@@ -1,50 +1,45 @@
-import React, { useState } from "react";
-import logo from "../assets/logo.png";
-import Buttons from '../Components/Buttons'
-import "../styles/forgot_pass.css";
-import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
-
+import React, {useState} from 'react'
+import logo from '../assets/logo.png'
+import '../styles/forgot_pass.css'
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 const Forgot_password = () => {
-  const [number, setNumber] = useState("");
- 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-   console.log(number);
-   alert("OTP Send Successfully on this Number"+ number)  
-  };
+ const [number, setNumber] = useState('')
 
-  return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <div className="container">
-          <div className="login-box">
-            <div className="logo-box">
-              <img src={logo} className="logo" alt="" />
-            </div>
-            <div className="text-box">
-              <h1>Forgot Password</h1>
-            </div>
+ const handleSubmit = (e) => {
+  e.preventDefault()
+  console.log(number)
+  alert('OTP Send Successfully on this Number' + number)
+ }
 
-            <div className="d-flex">
-              <PhoneInput
-                placeholder="Enter phone number"
-                value={number}
-                onChange={(value) => setNumber(value)}
-              />
-            </div>
-            <div className="button-box">
-              <Buttons>Send OTP</Buttons>
-            </div>
-            <div className="ragister">
-              <span className="text-muted">Back to</span>{" "}
-              <a href="/signin">Log in</a>
-            </div>
-          </div>
-        </div>
-      </form>
-    </>
-  );
-};
+ return (
+  <>
+   <form onSubmit={handleSubmit}>
+    <div className='container'>
+     <div className='login-box'>
+      <div className='logo-box'>
+       <img src={logo} className='logo' alt='' />
+      </div>
+      <div className='text-box'>
+       <h1>Forgot Password</h1>
+      </div>
 
-export default Forgot_password;
+      <div className='d-flex'>
+       <PhoneInput
+        placeholder='Enter phone number'
+        value={number}
+        onChange={(value) => setNumber(value)}
+       />
+      </div>
+      <div className='button-box'></div>
+      <div className='ragister'>
+       <span className='text-muted'>Back to</span> <a href='/signin'>Log in</a>
+      </div>
+     </div>
+    </div>
+   </form>
+  </>
+ )
+}
+
+export default Forgot_password
