@@ -1,0 +1,25 @@
+.anaimg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 70px;
+}
+.countBox {
+  margin-top: 20px;
+  font-size: 100px;
+}
+.countBox p {
+  text-align: center;
+}
+.countText {
+  margin-top: 20px;
+}
+.countText p {
+  text-align: center;
+  font-size: 23px;
+}
+.formControl {
+  margin: 1rem;
+  min-width: 120px;
+  max-width: 300px;
+}

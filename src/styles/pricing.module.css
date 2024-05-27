@@ -1,0 +1,223 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.pricingimg {
+  margin-top: 20px;
+  height: 90px;
+}
+
+.container {
+  display: flex;
+}
+
+.pricingtitle {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+}
+
+.titletext {
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center; /* Center the title text */
+}
+
+.card {
+  margin-top: 70px;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%; /* Default width for mobile */
+  max-width: 350px; /* Limit max width */
+  /* width: 350px; */
+  border-radius: 0.25rem;
+  border: 1px solid rgba(9, 9, 9, 0.1);
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+  padding: 1.5rem;
+  transition: box-shadow 0.5s ease-out;
+}
+
+.card:hover {
+  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Style for the middle card */
+.middleCard {
+  height: calc(100% + 40px); /* Increase height by 40px */
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the header content */
+}
+
+.title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.price {
+  font-size: 44px;
+  line-height: 1;
+  font-weight: 700;
+  color: #000;
+}
+
+.desc {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.625;
+  color: #000;
+}
+
+.lists {
+  margin-bottom: 1.5rem;
+  flex: 1 1 0%;
+}
+
+.lists .list {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.5rem;
+}
+
+.lists .list svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+  color: rgba(167, 139, 250, 1);
+}
+
+.action {
+  border: none;
+  outline: none;
+  display: inline-block;
+  border-radius: 0.25rem;
+  height: 50px;
+  width: 150px;
+  padding: 12px 25px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
+.rupeesicon {
+  font-size: 24px;
+}
+
+.rupeestext {
+  font-size: 15px;
+}
+
+.pricebox {
+  margin-top: 15px;
+}
+
+.listbox {
+  margin-top: 15px;
+}
+
+.cardcontainer {
+  display: flex;
+  /* justify-content: space-evenly; */
+  flex-wrap: wrap; /* Allow wrapping of cards */
+  justify-content: center; /* Center the card container */
+}
+
+.pricefooter {
+  margin-top: 150px;
+}
+.footerimg {
+  display: flex;
+  height: auto; /* Make the image responsive */
+  justify-content: center;
+}
+.footerimg img {
+  max-width: 29%;
+}
+
+.footertext {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 400;
+}
+.footerbtn {
+  margin-top: 10px;
+  justify-content: center; /* Center the button */
+}
+.endfooter {
+  background-color: #9e9e9e;
+  margin-top: 70px;
+}
+.bottom {
+  padding: 15px 0;
+  font-size: 15px;
+  line-height: 1;
+  text-align: center;
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .titletext {
+    font-size: 30px;
+  }
+
+  .card {
+    width: 100%; /* Full width on small devices */
+  }
+
+  .price {
+    font-size: 36px;
+  }
+
+  .footerimg img {
+    max-width: 50%;
+  }
+
+  .footertext {
+    font-size: 16px;
+  }
+}
+
+/* Medium devices (tablets, 600px to 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+  .card {
+    width: 45%; /* Two cards side by side */
+  }
+
+  .pricefooter {
+    margin-top: 80px;
+  }
+}
+
+/* Large devices (laptops/desktops, 900px and up) */
+@media (min-width: 901px) {
+  .card {
+    width: 30%; /* Three cards side by side */
+  }
+
+  .pricefooter {
+    margin-top: 150px;
+  }
+}
