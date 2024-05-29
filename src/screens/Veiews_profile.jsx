@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/accountdetails.css";
 
-const Accountdetails = () => {
+const Veiws_profile = () => {
   const buttonNames = [
     {
       id: 1,
@@ -206,9 +206,20 @@ const Accountdetails = () => {
           </a>
         ))}
       </div>
-      {/* </div> */}
+      <div className="veiews-footer">
+        <p>Powerd By</p>
+      </div>
+      <div>
+        <div className="veiews-footer-logo">
+          <img
+            src="https://login.biznesstag.com/assets/logo/logos.png
+"
+            alt=""
+          />
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Accountdetails;
+export default Veiws_profile;
