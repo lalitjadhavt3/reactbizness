@@ -2,6 +2,8 @@ import React, {useState, useRef, useEffect} from 'react'
 import logo from '../assets/logo.png'
 import {FaEye, FaEyeSlash} from 'react-icons/fa6'
 import '../styles/register.css'
+import {FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput} from '@mui/material'
+import {MdOutlineVisibilityOff, MdVisibility} from 'react-icons/md'
 
 const Register = () => {
  const [values, setValues] = useState({
@@ -14,6 +16,8 @@ const Register = () => {
  const [errors, setErrors] = useState({})
  const [showPassword, setShowPassword] = useState(false)
  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+ const handleClickShowPassword = () => setShowPassword((show) => !show)
+ const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show)
 
  const handleChange = (e) => {
   const {name, value} = e.target
@@ -73,54 +77,52 @@ const Register = () => {
     </div>
     <form onSubmit={handleSubmit}>
      <div className='form-box card'>
-      <div className='input-group input-wrapper'>
-       <input
-        type='email'
-        id='email'
-        name='email'
-        value={values.email}
-        onChange={handleChange}
-        required
-       />
-       <label htmlFor='email' className='placeholder'>
-        Email
-       </label>
-      </div>
+      <FormControl variant='outlined' className='formCustomControls'>
+       <InputLabel htmlFor='outlined-adornment-email'>Email</InputLabel>
+       <OutlinedInput required id='outlined-adornment-email' type='text' label='Email' />
+      </FormControl>
 
-      <div className='input-group input-wrapper '>
-       <input
+      <FormControl variant='outlined' className='formCustomControls'>
+       <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
+       <OutlinedInput
+        required
+        id='outlined-adornment-password'
         type={showPassword ? 'text' : 'password'}
-        id='password'
-        name='password'
-        value={values.password}
-        onChange={handleChange}
-        required
+        endAdornment={
+         <InputAdornment position='end'>
+          <IconButton
+           aria-label='toggle password visibility'
+           onClick={handleClickShowPassword}
+           edge='end'
+          >
+           {showPassword ? <MdVisibility /> : <MdOutlineVisibilityOff />}
+          </IconButton>
+         </InputAdornment>
+        }
+        label='Password'
        />
-       <label htmlFor='password' className='placeholder'>
-        Password
-       </label>
-       <a href='#' className='fa-eye' onClick={() => togglePasswordVisibility('password')}>
-        {showPassword ? <FaEyeSlash /> : <FaEye />}
-       </a>
-      </div>
+      </FormControl>
 
-      <div className='input-group input-wrapper '>
-       <input
-        ref={confirmPasswordRef}
-        type={showConfirmPassword ? 'text' : 'password'}
-        id='confirm_password'
-        name='confirm_password'
-        value={values.confirm_password}
-        onChange={handleChange}
+      <FormControl variant='outlined' className='formCustomControls'>
+       <InputLabel htmlFor='outlined-adornment-password'>Confirm Password</InputLabel>
+       <OutlinedInput
         required
+        id='outlined-adornment-password'
+        type={showConfirmPassword ? 'text' : 'password'}
+        endAdornment={
+         <InputAdornment position='end'>
+          <IconButton
+           aria-label='toggle password visibility'
+           onClick={handleClickShowConfirmPassword}
+           edge='end'
+          >
+           {showConfirmPassword ? <MdVisibility /> : <MdOutlineVisibilityOff />}
+          </IconButton>
+         </InputAdornment>
+        }
+        label='Confirm Password'
        />
-       <label htmlFor='confirm_password' className='placeholder'>
-        Confirm Password
-       </label>
-       <a href='#' className='fa-eye' onClick={() => togglePasswordVisibility('confirm_password')}>
-        {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-       </a>
-      </div>
+      </FormControl>
 
       <div className='input-group input-wrapper'>
        <select
