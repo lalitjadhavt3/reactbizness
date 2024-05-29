@@ -90,7 +90,7 @@ const SignIn = () => {
         setPassword(e.target.value)
        }}
       /> */}
-      <FormControl variant='outlined' style={{width: '100%'}}>
+      <FormControl variant='outlined' style={{width: '100%', marginTop: '20px'}}>
        <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
        <OutlinedInput
         id='outlined-adornment-password'
@@ -102,41 +102,52 @@ const SignIn = () => {
            onClick={handleClickShowPassword}
            edge='end'
           >
-           {showPassword ? <MdOutlineVisibilityOff /> : <MdVisibility />}
+           {showPassword ? <MdVisibility /> : <MdOutlineVisibilityOff />}
           </IconButton>
          </InputAdornment>
         }
         label='Password'
        />
       </FormControl>
-      <TextField
-       className='inputClass'
-       variant='outlined'
-       value={password}
-       required
-       onChange={(e) => {
-        setPassword(e.target.value)
-       }}
-       id='outlined-adornment-password'
-       type={showPassword ? 'text' : 'password'}
-       endAdornment={
-        <InputAdornment position='end'>
-         <IconButton
-          aria-label='toggle password visibility'
-          onClick={handleClickShowPassword}
-          edge='end'
-         >
-          {showPassword ? <MdOutlineVisibilityOff /> : <MdVisibility />}
-         </IconButton>
-        </InputAdornment>
-       }
-       label='Password'
-      />
+      {/* <TextField
+              className="inputClass"
+              variant="outlined"
+              value={password}
+              required
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              id="outlined-adornment-password"
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    edge="end"
+                  >
+                    {showPassword ? (
+                      <MdOutlineVisibilityOff />
+                    ) : (
+                      <MdVisibility />
+                    )}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Password"
+            /> */}
 
-      <div className='button-box'></div>
+      <div className='button-box'>
+       {' '}
+       <CustomButton
+        btnText={'Login'}
+        // logoIcon={<FaEye />}
+        iconPosition={'start'}
+       />
+      </div>
      </div>
     </form>
-    <CustomButton btnText={'Login'} logoIcon={<FaEye />} iconPosition={'start'} />
+    <CustomButton btnText={'Login with Google'} logoIcon={<FaEye />} iconPosition={'start'} />
     <div className='Forgot_pass'>
      <a href='/forgot'>Forgot your password?</a>
     </div>

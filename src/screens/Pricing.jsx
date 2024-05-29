@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from '../styles/pricing.module.css'
 import CustomButton from '../components/CustomButton'
+import Footer from '../components/Footer'
 
 const Pricing = () => {
  const card = [
@@ -125,11 +126,7 @@ const Pricing = () => {
      />
     </div>
    </div>
-   <div className={styles.endfooter}>
-    <div className={styles.bottom}>
-     <p>© Copyright - Bizness Shelter</p>
-    </div>
-   </div>
+   <Footer />
   </>
  )
 }

@@ -428,19 +428,8 @@ const EditProfile = () => {
    ) : (
     <Loader />
    )}
-   <div
-    style={{
-     position: 'fixed',
-     zIndex: '200',
-     display: 'flex',
-     justifyContent: 'center',
-     bottom: '0%',
-     width: '100vw',
-     backgroundColor: 'lightgray',
-    }}
-   >
-    <Footer />
-   </div>
+
+   <Footer />
   </div>
  )
 }
