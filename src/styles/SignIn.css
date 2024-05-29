@@ -132,9 +132,13 @@ a:hover {
 .text-muted {
   color: #6c757d !important;
 }
-
+.formCustomControls{
+  margin-top: 9%!important;
+  width: 100%;
+}
 
 .input-wrapper {
+  margin-top: 9%;
   --padding: 16px;
   --focus-color: black;
   position: relative;

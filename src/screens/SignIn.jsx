@@ -65,31 +65,13 @@ const SignIn = () => {
      <h1>Sign In</h1>
      <h3 className='alllables'>Continue to Business Shelter</h3>
     </div>
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{marginBottom: '10%'}}>
      <div className='form-box card'>
-      <TextField
-       className='inputClass'
-       ref={emailRef}
-       variant='outlined'
-       id='password'
-       label='Email'
-       value={email}
-       required
-       onChange={(e) => {
-        setEmail(e.target.value)
-       }}
-      />
-      {/* <TextField
-       className='inputClass'
-       variant='outlined'
-       id='password'
-       label='Password'
-       value={password}
-       required
-       onChange={(e) => {
-        setPassword(e.target.value)
-       }}
-      /> */}
+      <FormControl variant='outlined' style={{width: '100%', marginTop: '20px'}}>
+       <InputLabel htmlFor='outlined-adornment-email'>Email</InputLabel>
+       <OutlinedInput id='outlined-adornment-email' type='text' label='Email' />
+      </FormControl>
+
       <FormControl variant='outlined' style={{width: '100%', marginTop: '20px'}}>
        <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
        <OutlinedInput
@@ -109,33 +91,6 @@ const SignIn = () => {
         label='Password'
        />
       </FormControl>
-      {/* <TextField
-              className="inputClass"
-              variant="outlined"
-              value={password}
-              required
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              id="outlined-adornment-password"
-              type={showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    edge="end"
-                  >
-                    {showPassword ? (
-                      <MdOutlineVisibilityOff />
-                    ) : (
-                      <MdVisibility />
-                    )}
-                  </IconButton>
-                </InputAdornment>
-              }
-              label="Password"
-            /> */}
 
       <div className='button-box'>
        {' '}
