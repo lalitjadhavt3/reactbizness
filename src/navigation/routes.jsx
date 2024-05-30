@@ -9,19 +9,21 @@ import EditProfile from '../screens/EditProfile'
 import Analytics from '../screens/Analytics'
 import {AccordionDetails} from '@mui/material'
 import Pricing from '../screens/Pricing'
+import Profile_Views from '../screens/Profile_Views'
 const NavigationRouter = () => {
  return (
   <Router>
    <Routes>
-    <Route path='/' element={<Home />} />
+    <Route path='/' element={<Profile_Views />} />
     <Route path='*' element={<NotFound />} />
-    <Route path='/signin' element={<SignIn />} />
+    <Route path='/login' element={<SignIn />} />
     <Route path='/register' element={<Register />} />
     <Route path='/forgotPassword' element={<Forgot_password />} />
     <Route path='/editProfile/:id' element={<EditProfile />} />
-    <Route path='/account' element={<AccordionDetails />} />
+    <Route path='/account' element={<Profile_Views />} />
     <Route path='/pricing' element={<Pricing />} />
     <Route path='/analytics' element={<Analytics />} />
+    <Route path='/profile' element={<Profile_Views />} />
    </Routes>
   </Router>
  )

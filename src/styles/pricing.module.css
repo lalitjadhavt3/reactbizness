@@ -154,8 +154,10 @@
     font-weight: 400;
   }
   .footerbtn {
-    margin-top: 10px;
-    justify-content: center; /* Center the button */
+    margin-top: 3%;
+    width: 100%;
+    justify-content: center;
+    display: flex; /* Center the button */
   }
   .endfooter {
     background-color: #9e9e9e;

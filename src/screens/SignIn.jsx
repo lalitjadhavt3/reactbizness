@@ -14,7 +14,9 @@ import {
  TextField,
 } from '@mui/material'
 import {MdOutlineVisibilityOff, MdVisibility} from 'react-icons/md'
+import {useNavigate} from 'react-router-dom'
 const SignIn = () => {
+ const navigation = useNavigate()
  const [showPassword, setShowPassword] = useState(false)
  const [email, setEmail] = useState('')
  const [password, setPassword] = useState('')
@@ -98,11 +100,21 @@ const SignIn = () => {
         btnText={'Login'}
         // logoIcon={<FaEye />}
         iconPosition={'start'}
+        onClick={() => {
+         navigation('/')
+        }}
        />
       </div>
      </div>
     </form>
-    <CustomButton btnText={'Login with Google'} logoIcon={<FaEye />} iconPosition={'start'} />
+    <CustomButton
+     btnText={'Login with Google'}
+     logoIcon={<FaEye />}
+     iconPosition={'start'}
+     onClick={() => {
+      navigation('/')
+     }}
+    />
     <div className='Forgot_pass'>
      <a href='/forgot'>Forgot your password?</a>
     </div>

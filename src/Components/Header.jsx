@@ -13,6 +13,7 @@ import {BsPersonAdd, BsGear, BsNintendoSwitch} from 'react-icons/bs'
 import {FaGear} from 'react-icons/fa6'
 import {BiLogOut} from 'react-icons/bi'
 import {FiLogOut} from 'react-icons/fi'
+import {Link} from 'react-router-dom'
 
 export default function Header() {
  const [anchorEl, setAnchorEl] = React.useState(null)
@@ -82,45 +83,33 @@ export default function Header() {
     transformOrigin={{horizontal: 'right', vertical: 'top'}}
     anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
    >
-    <MenuItem
-     style={{marginLeft: '2%', borderBottom: '2px inset', borderBottomWidth: '2px'}}
-     onClick={handleClose}
-    >
-     Buy Now
+    <MenuItem style={{margin: '5% 5%', borderBottom: '2px inset', borderBottomWidth: '2px'}}>
+     {' '}
+     <Link to={'/pricing'} target='_blank'>
+      Buy Now
+     </Link>
     </MenuItem>
-    <MenuItem
-     style={{marginLeft: '2%', borderBottom: '2px inset', borderBottomWidth: '2px'}}
-     onClick={handleClose}
-    >
-     Analytics
+    <MenuItem style={{margin: '5% 5%', borderBottom: '2px inset', borderBottomWidth: '2px'}}>
+     <Link to={'/analytics'} target='_blank'>
+      Analytics
+     </Link>
     </MenuItem>
-    <MenuItem
-     style={{marginLeft: '2%', borderBottom: '2px inset', borderBottomWidth: '2px'}}
-     onClick={handleClose}
-    >
-     View Profile
+    <MenuItem style={{margin: '5% 5%', borderBottom: '2px inset', borderBottomWidth: '2px'}}>
+     <Link to={'/profile'}>View Profile</Link>
     </MenuItem>
-    <MenuItem
-     style={{marginLeft: '2%', borderBottom: '2px inset', borderBottomWidth: '2px'}}
-     onClick={handleClose}
-    >
-     Edit Profile
+    <MenuItem style={{margin: '5% 5%', borderBottom: '2px inset', borderBottomWidth: '2px'}}>
+     <Link to={'/editProfile/1'}>Edit Profile</Link>
     </MenuItem>
-    <MenuItem
-     style={{marginLeft: '2%', borderBottom: '2px inset', borderBottomWidth: '2px'}}
-     onClick={handleClose}
-    >
-     View QR
+    <MenuItem style={{margin: '5% 5%', borderBottom: '2px inset', borderBottomWidth: '2px'}}>
+     {' '}
+     <Link to={'/view_qr'}>View QR</Link>
     </MenuItem>
-    <MenuItem
-     style={{marginLeft: '2%', borderBottom: '2px inset', borderBottomWidth: '2px'}}
-     onClick={handleClose}
-    >
-     Edit Profile
+    <MenuItem style={{margin: '5% 5%', borderBottom: '2px inset', borderBottomWidth: '2px'}}>
+     {' '}
+     <Link to={'/referral'}>Refer & Earn</Link>
     </MenuItem>
-
-    <MenuItem onClick={handleClose}>
-     Logout    
+    <MenuItem style={{margin: '0% 5%', borderBottom: '2px inset', borderBottomWidth: '2px'}}>
+     <Link to={'/login'}>Logout    </Link>
      <ListItemIcon>
       <FiLogOut fontSize='small' />
      </ListItemIcon>

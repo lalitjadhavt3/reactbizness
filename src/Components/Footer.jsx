@@ -9,12 +9,16 @@ const Footer = () => {
     zIndex: '200',
     display: 'flex',
     justifyContent: 'center',
+    alignItems: 'center',
     bottom: '0%',
     width: '100vw',
     backgroundColor: 'lightgray',
+    height: '45px',
    }}
   >
-   <label>Bizness shelter</label>
+   <label>
+    <b>© Copyright - Bizness shelter</b>
+   </label>
   </div>
  )
 }
