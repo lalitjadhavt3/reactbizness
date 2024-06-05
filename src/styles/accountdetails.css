@@ -1,9 +1,8 @@
 .account-box {
-  max-width: 300px;
+  max-width: 500px;
   margin: 50px auto;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #fff;
+ 
+
 }
 
 .display {
@@ -21,6 +20,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 13px;
+  justify-items: center;
 }
 
 .button {
@@ -58,6 +58,8 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 13px;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .btnAccount {
@@ -83,7 +85,6 @@
   font-weight: bold;
 }
 .btnimg {
-  margin-top: 8px;
   justify-content: center;
   height: 32px;
 }

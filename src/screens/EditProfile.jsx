@@ -90,7 +90,31 @@ const EditProfile = () => {
     setCountryList(countryList.sort((a, b) => a.name.localeCompare(b.name)))
     setIsCountryLoading(false)
    })
-   .catch((error) => console.error('Error fetching countries:', error))
+   .catch((error) => {
+    const data = [
+     {name: {common: 'United States'}, cca2: 'US'},
+     {name: {common: 'Canada'}, cca2: 'CA'},
+     {name: {common: 'Brazil'}, cca2: 'BR'},
+     {name: {common: 'United Kingdom'}, cca2: 'GB'},
+     {name: {common: 'France'}, cca2: 'FR'},
+     {name: {common: 'Germany'}, cca2: 'DE'},
+     {name: {common: 'Australia'}, cca2: 'AU'},
+     {name: {common: 'India'}, cca2: 'IN'},
+     {name: {common: 'China'}, cca2: 'CN'},
+     {name: {common: 'Japan'}, cca2: 'JP'},
+     {name: {common: 'South Korea'}, cca2: 'KR'},
+     {name: {common: 'Mexico'}, cca2: 'MX'},
+     {name: {common: 'Italy'}, cca2: 'IT'},
+     {name: {common: 'Spain'}, cca2: 'ES'},
+     {name: {common: 'Russia'}, cca2: 'RU'},
+    ]
+    const countryList = data.map((country) => ({
+     name: country.name.common,
+     code: country.cca2,
+    }))
+    setCountryList(countryList.sort((a, b) => a.name.localeCompare(b.name)))
+    setIsCountryLoading(false)
+   })
  }, [])
 
  // Fetch list of states for the selected country

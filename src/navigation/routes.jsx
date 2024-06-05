@@ -12,7 +12,7 @@ import Pricing from '../screens/Pricing'
 import Profile_Views from '../screens/Profile_Views'
 const NavigationRouter = () => {
  return (
-  <Router>
+  <Router basename={'/react'}>
    <Routes>
     <Route path='/' element={<Profile_Views />} />
     <Route path='*' element={<NotFound />} />
