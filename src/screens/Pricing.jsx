@@ -56,7 +56,7 @@ const Pricing = () => {
    <div className={styles.cardcontainer}>
     {card.map((i, index) => {
      return (
-      <div key={i.id} className={`${styles.card} ${index === 1 ? styles.middleCard : ''}`}>
+      <div key={i.id} className={`${styles.formCard} ${index === 1 ? styles.middleCard : ''}`}>
        <div className={styles.header}>
         <span className={styles.title}>{i.title}</span>
        </div>

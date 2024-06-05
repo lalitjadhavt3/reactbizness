@@ -68,7 +68,7 @@ const SignIn = () => {
      <h3 className='alllables'>Continue to Business Shelter</h3>
     </div>
     <form onSubmit={handleSubmit} style={{marginBottom: '10%'}}>
-     <div className='form-box form-card'>
+     <div className='form-box formCard'>
       <FormControl variant='outlined' style={{width: '100%', marginTop: '20px'}}>
        <InputLabel htmlFor='outlined-adornment-email'>Email</InputLabel>
        <OutlinedInput id='outlined-adornment-email' type='text' label='Email' />
