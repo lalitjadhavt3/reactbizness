@@ -14,7 +14,7 @@ import {
  TextField,
 } from '@mui/material'
 import {MdOutlineVisibilityOff, MdVisibility} from 'react-icons/md'
-import {useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 const SignIn = () => {
  const navigation = useNavigate()
  const [showPassword, setShowPassword] = useState(false)
@@ -116,7 +116,7 @@ const SignIn = () => {
      }}
     />
     <div className='Forgot_pass'>
-     <a href='/forgot'>Forgot your password?</a>
+     <Link to={'/forgot'}>Forgot your password?</Link>
     </div>
 
     <div className='ragister'>
