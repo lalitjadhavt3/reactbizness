@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useState} from 'react'
 import '../styles/SignIn.css'
 import '../App.css'
 import logo from '../assets/logo.png'
@@ -6,17 +6,10 @@ import {FaGoogle} from 'react-icons/fa'
 import {FaEye, FaEyeSlash} from 'react-icons/fa6'
 import CustomButton from '../components/CustomButton'
 import axios from 'axios'
-import {
- FormControl,
- IconButton,
- InputAdornment,
- InputLabel,
- OutlinedInput,
- TextField,
-} from '@mui/material'
+import {FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput} from '@mui/material'
 import {MdOutlineVisibilityOff, MdVisibility} from 'react-icons/md'
 import {Link, useNavigate} from 'react-router-dom'
-import api from '../utils/api'
+
 const SignIn = () => {
  const navigate = useNavigate()
  const [showPassword, setShowPassword] = useState(false)
@@ -41,7 +34,6 @@ const SignIn = () => {
   }
 
   setErrors(errors)
-  console.log('🚀 ~ handleSubmit ~ errors:', errors)
 
   // If no errors, proceed with sign-in logic
   if (Object.keys(errors).length === 0) {
@@ -51,17 +43,22 @@ const SignIn = () => {
      password: password,
     }
 
-    const response = await api.post('/login.php', postData)
+    const response = await axios.post('http://localhost/bizness/login.php', postData)
+
+    // Handle successful response
+    console.log('Response:', response.data)
+
+    // Here you can handle the response data, such as displaying a success message or redirecting the user
     if (response.data.success) {
-     localStorage.setItem('access_token', response.data.access_token)
-     localStorage.setItem('refresh_token', response.data.refresh_token)
-     navigate('/')
-     // Optionally, redirect or update UI to indicate successful login
+     console.log('Sign in successful!')
+     // Redirect to another page or perform other actions on successful login
+     navigate('/dashboard') // Example navigation to dashboard
     } else {
      console.error('Login failed:', response.data.message)
     }
    } catch (error) {
-    console.error('Login failed:', error)
+    // Handle error
+    console.error('Error:', error)
    }
   }
  }
@@ -84,8 +81,11 @@ const SignIn = () => {
         id='outlined-adornment-email'
         type='text'
         label='Email'
+        value={email}
         onChange={(e) => setEmail(e.target.value)}
+        error={!!errors.email}
        />
+       {errors.email && <span className='error'>{errors.email}</span>}
       </FormControl>
 
       <FormControl variant='outlined' style={{width: '100%', marginTop: '20px'}}>
@@ -93,6 +93,7 @@ const SignIn = () => {
        <OutlinedInput
         id='outlined-adornment-password'
         type={showPassword ? 'text' : 'password'}
+        value={password}
         onChange={(e) => setPassword(e.target.value)}
         endAdornment={
          <InputAdornment position='end'>
@@ -106,27 +107,35 @@ const SignIn = () => {
          </InputAdornment>
         }
         label='Password'
+        error={!!errors.password}
        />
+       {errors.password && <span className='error'>{errors.password}</span>}
       </FormControl>
 
       <div className='button-box'>
-       {' '}
        <CustomButton
         btnText={'Login'}
         // logoIcon={<FaEye />}
         iconPosition={'start'}
-        btnType={'submit'}
+        type='submit'
        />
       </div>
      </div>
     </form>
-    <CustomButton btnText={'Login with Google'} logoIcon={<FaEye />} iconPosition={'start'} />
+    <CustomButton
+     btnText={'Login with Google'}
+     logoIcon={<FaGoogle />}
+     iconPosition={'start'}
+     onClick={() => {
+      // Add your Google login logic here
+     }}
+    />
     <div className='Forgot_pass'>
      <Link to={'/forgot'}>Forgot your password?</Link>
     </div>
 
     <div className='ragister'>
-     <span className='text-muted'>Don't have an account?</span> <a href='/register'>Register</a>
+     <span className='text-muted'>Don't have an account?</span> <Link to='/register'>Register</Link>
     </div>
    </div>
   </div>
