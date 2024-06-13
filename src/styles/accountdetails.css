@@ -1,8 +1,6 @@
 .account-box {
   max-width: 500px;
-  margin: 50px auto;
- 
-
+  margin: 10px auto;
 }
 
 .display {
@@ -38,9 +36,8 @@
 .button:hover {
   background-color: #e0e0e0;
 }
-.userPic {
-  height: 120px;
-  width: 120px;
+
+.userPicAcc, .userPic {
   border-radius: 50%;
   background-color: rgba(217, 217, 217, 1);
   margin: 0 auto;
@@ -49,10 +46,22 @@
   justify-content: center;
   text-align: center;
 }
+
+.userPicAcc {
+  height: 75px;
+  width: 80px;
+}
+
+.userPic {
+  height: 120px;
+  width: 120px;
+}
+
 .useNa {
   margin-top: 20px;
   text-align: center;
 }
+
 .btnAccountContainer {
   margin-top: 20px;
   display: grid;
@@ -72,22 +81,25 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
 .buttonImage {
   height: 50px;
 }
+
 .buttonTitle {
   margin-top: 8px;
   justify-content: center;
   align-items: center;
-  width: 95px;
   display: flex;
   font-size: 11px;
   font-weight: bold;
 }
+
 .btnimg {
   justify-content: center;
   height: 32px;
 }
+
 .btnTitle {
   margin-top: 5px;
   display: flex;
@@ -97,11 +109,13 @@
   font-size: 12px;
   font-weight: bold;
 }
+
 .a-btn {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .open {
   color: #28a745;
 }
@@ -113,11 +127,92 @@
   align-items: center;
   justify-content: center;
 }
+
 .views-footer-logo {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .views-footer-logo img {
   height: 43px;
+}
+
+.slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center align the slider */
+  max-width: 500px;
+  margin: 0 auto; /* Center align on the page */
+}
+
+.slider {
+  overflow: hidden;
+  width: 100%;
+  padding: 0 2%;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.slide {
+  min-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three icons per row */
+  justify-items: center;
+  gap: 5px;
+  padding: 10px 0; /* Add some padding to space the rows */
+}
+
+.button {
+  width: 60px;
+  height: 60px;
+  margin: 10px;
+  border: none;
+  border-radius: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonImage {
+  width: 50%;
+  height: 50%;
+  object-fit: contain;
+}
+
+.buttonTitle {
+  display: block;
+  text-align: center;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #000;
+}
+
+.prev-button, .next-button {
+  background: none;
+  border: none;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.dots {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  background-color: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #000;
 }

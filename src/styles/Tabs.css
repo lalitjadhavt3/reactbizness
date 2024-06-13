@@ -1,0 +1,36 @@
+.tabs-container {
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+}
+
+.tabs-header {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  overflow-x: auto;
+}
+
+.tab {
+  padding: 15px 10px;
+  cursor: pointer;
+}
+
+.tab.active {
+  border-bottom: 2px solid #000;
+  font-weight: bold;
+}
+
+.tab:hover {
+  border-bottom: 2px solid #000;
+}
+
+.tab-content {
+  flex-grow: 1;
+  padding: 5px;
+  overflow-y: auto; /* Ensure content is scrollable if it exceeds view height */
+}
+.tabs-sidebar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
