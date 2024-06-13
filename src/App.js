@@ -1,6 +1,7 @@
+import React from 'react'
 import './App.css'
-import NavigationRouter from './navigation/routes'
 import {ThemeProvider, createTheme} from '@mui/material/styles'
+import NavigationRouter from './navigation/routes'
 
 // Create a custom theme with adorned element background color
 const theme = createTheme({
