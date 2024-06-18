@@ -13,9 +13,12 @@ import {BsPersonAdd, BsGear, BsNintendoSwitch} from 'react-icons/bs'
 import {FaGear} from 'react-icons/fa6'
 import {BiLogOut} from 'react-icons/bi'
 import {FiLogOut} from 'react-icons/fi'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import {Button} from '@mui/material'
 
 export default function Header() {
+ const navigate = useNavigate()
+
  const [anchorEl, setAnchorEl] = React.useState(null)
  const open = Boolean(anchorEl)
  const handleClick = (event) => {
@@ -23,6 +26,13 @@ export default function Header() {
  }
  const handleClose = () => {
   setAnchorEl(null)
+ }
+ const handleLogout = () => {
+  navigate('/login')
+  localStorage.removeItem('access_token')
+  localStorage.removeItem('user_id')
+  localStorage.removeItem('username')
+  localStorage.removeItem('refresh_token')
  }
  return (
   <React.Fragment>
@@ -109,7 +119,13 @@ export default function Header() {
      <Link to={'/referral'}>Refer & Earn</Link>
     </MenuItem>
     <MenuItem style={{margin: '0% 5%', borderBottom: '2px inset', borderBottomWidth: '2px'}}>
-     <Link to={'/login'}>Logout    </Link>
+     <a
+      onClick={() => {
+       handleLogout()
+      }}
+     >
+      Logout    
+     </a>
      <ListItemIcon>
       <FiLogOut fontSize='small' />
      </ListItemIcon>
