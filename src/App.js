@@ -2,6 +2,7 @@ import React from 'react'
 import './App.css'
 import {ThemeProvider, createTheme} from '@mui/material/styles'
 import NavigationRouter from './navigation/routes'
+import {AuthProvider} from './context/AuthContext'
 
 // Create a custom theme with adorned element background color
 const theme = createTheme({
@@ -63,9 +64,11 @@ const theme = createTheme({
 
 function App() {
  return (
-  <ThemeProvider theme={theme}>
-   <NavigationRouter />
-  </ThemeProvider>
+  <AuthProvider>
+   <ThemeProvider theme={theme}>
+    <NavigationRouter />
+   </ThemeProvider>
+  </AuthProvider>
  )
 }
 

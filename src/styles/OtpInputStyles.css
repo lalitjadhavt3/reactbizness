@@ -1,0 +1,18 @@
+.otp-container {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .otp-input .MuiInputBase-input {
+    text-align: center;
+    width: 2rem;
+  }
+  
+  @media (max-width: 600px) {
+    .otp-input .MuiInputBase-input {
+      width: 1.5rem;
+    }
+  }
+  
