@@ -41,7 +41,9 @@
     border: 2px solid var(--focus-color);
 }
 .register{
-  margin-left: 35px;
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
 }
   /* Add necessary styles for react-phone-number-input */
 .react-phone-number-input__country {

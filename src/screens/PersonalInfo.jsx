@@ -90,12 +90,7 @@ const PersonalInfo = () => {
 
      // Optionally, redirect or update UI to indicate successful login
     }
-   } catch (error) {
-    MySwal.fire({
-     icon: 'error',
-     title: 'ERR-1001 Login failed, Please contact administrator',
-    }).then(() => {})
-   }
+   } catch (error) {}
   }
   checkPersonalInfo()
  }, [])
