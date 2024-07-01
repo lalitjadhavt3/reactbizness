@@ -8,6 +8,11 @@
   padding-left: 20px !important;
   padding-right: 20px !important;
 }
+.error-text{
+  color: red;
+  font-size: 13px;
+
+}
 
 .login-box {
   margin-left: auto;
@@ -157,6 +162,7 @@ input {
   left: var(--padding);
   padding: 0 4px;
   transition: all 0.2s ease-in;
+  cursor: pointer;
 }
 
 input:is(:focus, :valid) {

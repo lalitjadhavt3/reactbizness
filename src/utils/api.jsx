@@ -1,7 +1,9 @@
 import axios from 'axios'
-
+const ENV = 'dev'
+const baseURL =
+ ENV === 'prod' ? 'https://biznessshelter.in/biznessapi/api/' : 'http://localhost/bizness/api/'
 const api = axios.create({
- baseURL: 'https://biznessshelter.in/biznessapi/api/', // Replace with your API URL
+ baseURL: 'http://localhost/bizness/api/', // Replace with your API URL
  headers: {
   'Content-Type': 'application/json',
  },

@@ -173,7 +173,7 @@
     font-weight: 600;
   }
   input:is(:focus, :valid) {
-    border: 2px solid var(--focus-color);
+    border: 1px solid var(--focus-color);
   }
   
   input:is(:focus, :valid) + .placeholder {

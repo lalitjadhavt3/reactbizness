@@ -9,7 +9,13 @@
     display: flex;
     justify-content: center;
   }
-
+  .personal-info-form{
+    margin-top: 2%!important;
+  }
+.formLabelBusinessInfo{
+  margin-bottom: 1%;
+  margin-top: 10%;
+}
   select {
     width: 100%;
     padding: 8px;
@@ -37,8 +43,30 @@
 .register{
   margin-left: 35px;
 }
-  
- 
+  /* Add necessary styles for react-phone-number-input */
+.react-phone-number-input__country {
+  display: flex;
+  align-items: center;
+}
+
+.react-phone-number-input__icon {
+  margin-right: 8px;
+}
+.PhoneInputInput{
+  padding: unset!important;
+}
+.PhoneInput{
+  padding: 16px 14px!important;
+
+  width: 100%!important;
+  height: unset!important;
+ margin-top: 1%!important;
+}
+.business-contact-form{
+  display:flex!important;
+  flex-direction: row!important;
+  justify-content: space-around!important;
+}
   
 
 

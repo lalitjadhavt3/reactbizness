@@ -2,7 +2,15 @@ import React, {useState, useRef, useEffect} from 'react'
 import logo from '../assets/logo.png'
 import {FaEye, FaEyeSlash} from 'react-icons/fa6'
 import '../styles/register.css'
-import {FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput} from '@mui/material'
+import {
+ FormControl,
+ IconButton,
+ InputAdornment,
+ InputLabel,
+ OutlinedInput,
+ Select,
+ MenuItem,
+} from '@mui/material'
 import {MdOutlineVisibilityOff, MdVisibility} from 'react-icons/md'
 
 const Register = () => {
@@ -76,7 +84,7 @@ const Register = () => {
      <h1>Sign up</h1>
     </div>
     <form onSubmit={handleSubmit}>
-     <div className='form-box card'>
+     <div className='form-box form-card'>
       <FormControl variant='outlined' className='formCustomControls'>
        <InputLabel htmlFor='outlined-adornment-email'>Email</InputLabel>
        <OutlinedInput required id='outlined-adornment-email' type='text' label='Email' />
@@ -125,28 +133,29 @@ const Register = () => {
       </FormControl>
 
       <div className='input-group input-wrapper'>
-       <select
-        id='account_type'
-        name='account_type'
-        value={values.account_type}
-        onChange={handleChange}
-        required
-       >
-        <option value='' disabled>
-         Select Account Type{' '}
-        </option>
-        <option value='business'>Business Account</option>
-        <option value='individual'>Personal Account</option>
-       </select>
-       <label htmlFor='account_type' className='placeholder select-label'>
-        Account Type
-       </label>
+       <FormControl fullWidth required>
+        <InputLabel id='account_type-label'>Account Type</InputLabel>
+        <Select
+         labelId='account_type-label'
+         id='account_type'
+         name='account_type'
+         value={values.account_type}
+         onChange={handleChange}
+         label='Account Type'
+        >
+         <MenuItem value='' disabled>
+          Select Account Type
+         </MenuItem>
+         <MenuItem value='business'>Business Account</MenuItem>
+         <MenuItem value='individual'>Personal Account</MenuItem>
+        </Select>
+       </FormControl>
       </div>
       <div className='button-box'></div>
      </div>
     </form>
     <div className='register'>
-     <span className='text-muted'>Already registered? </span> <a href='/signin'>Log in</a>
+     <span className='text-muted'>Already registered? </span> <a href='/login'>Log in</a>
     </div>
    </div>
   </div>
