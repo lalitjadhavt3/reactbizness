@@ -16,6 +16,10 @@ import BusinessInfo from '../screens/BusinessInfo'
 import BusinessContact from '../screens/BusinessContact'
 import BusinessLocation from '../screens/BusinessLocation'
 import BusinessUpi from '../screens/BusinessUpi'
+import BusinessTimings from '../screens/BusinessTimings'
+import LocationFetcher from '../screens/LocationFetcher'
+import RegisterUser from '../screens/RegisterUser'
+import Login from '../screens/Login'
 const NavigationRouter = () => {
  const {isAuthenticated} = useAuth() // Access isAuthenticated from AuthContext
 
@@ -36,16 +40,18 @@ const NavigationRouter = () => {
     </Routes>
    ) : (
     <Routes>
-     <Route path='/' element={<SignIn />} />
+     <Route path='/' element={<Login />} />
      <Route path='*' element={<NotFound />} />
-     <Route path='/login' element={<SignIn />} />
-     <Route path='/register' element={<Register />} />
+     <Route path='/login' element={<Login />} />
+     <Route path='/register' element={<RegisterUser />} />
      <Route path='/forgotPassword' element={<ForgotPassword />} />
      <Route path='/registration/personal-info' element={<PersonalInfo />} />
      <Route path='/registration/business-info' element={<BusinessInfo />} />
      <Route path='/registration/business-location' element={<BusinessLocation />} />
      <Route path='/registration/business-contact' element={<BusinessContact />} />
      <Route path='/registration/business-upi' element={<BusinessUpi />} />
+     <Route path='/registration/business-timings' element={<BusinessTimings />} />
+     <Route path='/registration/business-locationDetect' element={<LocationFetcher />} />
     </Routes>
    )}
   </>

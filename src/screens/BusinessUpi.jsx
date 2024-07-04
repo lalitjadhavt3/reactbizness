@@ -73,12 +73,7 @@ const BusinessUpi = () => {
    const response = await api.post('/user_upi_info.php', postData)
    if (response?.data?.status?.success) {
     if (response?.data?.status?.description == 'info_added') {
-     MySwal.fire({
-      icon: 'success',
-      title: 'User Information Added',
-     }).then(() => {
-      navigate('/registration/business-upi')
-     })
+     navigate('/registration/business-upi')
     } else if (response?.data?.status?.description == 'info_updated') {
      if (response?.data?.status?.message == 'user_registration_success') {
       MySwal.fire({

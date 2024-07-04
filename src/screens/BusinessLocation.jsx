@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react'
-import {FormControl, InputLabel, OutlinedInput, Select, MenuItem} from '@mui/material'
+import {FormControl, InputLabel, OutlinedInput} from '@mui/material'
 import CustomButton from '../components/CustomButton'
 import '../styles/register.css'
 import {useNavigate} from 'react-router-dom'
 import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
-import api from '../utils/api'
+import api, {geolocationapikey} from '../utils/api'
+
 const BusinessLocation = () => {
  const navigate = useNavigate()
  const MySwal = withReactContent(Swal)
@@ -17,7 +18,9 @@ const BusinessLocation = () => {
   city: '',
   pinCode: '',
  })
- const [errors, setErrors] = useState({})
+ const [errors, setErrors] = useState('')
+ const [geolocationFetched, setGeolocationFetched] = useState(false)
+
  useEffect(() => {
   const checkBusinessInfo = async () => {
    try {
@@ -26,6 +29,7 @@ const BusinessLocation = () => {
     }
 
     const response = await api.post('/get_user_details_with_page.php', postData)
+
     if (response?.data?.status?.description) {
      const {business_address, business_country, business_area, business_state, business_pincode} =
       response?.data?.data?.user_info
@@ -38,17 +42,64 @@ const BusinessLocation = () => {
       country: business_country,
      })
 
-     // Optionally, redirect or update UI to indicate successful login
+     // Fetch geolocation only if some fields are missing
+     if (!business_country || !business_state || !business_area || !business_pincode) {
+      fetchGeolocation()
+     }
     }
    } catch (error) {
     MySwal.fire({
      icon: 'error',
      text: 'ERR-1001 Login failed, Please contact administrator',
-    }).then(() => {})
+    })
    }
   }
+
   checkBusinessInfo()
  }, [])
+
+ const fetchGeolocation = () => {
+  if (navigator.geolocation) {
+   navigator.geolocation.getCurrentPosition(
+    (position) => {
+     const {latitude, longitude} = position.coords
+     fetchLocationDetails(latitude, longitude)
+    },
+    (error) => {
+     console.error(error)
+    }
+   )
+  } else {
+   console.error('Geolocation is not supported by this browser.')
+  }
+ }
+
+ const fetchLocationDetails = async (latitude, longitude) => {
+  const apiKey = geolocationapikey // Replace with your OpenCage API key
+  const url = `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKey}`
+
+  try {
+   const response = await fetch(url)
+   const data = await response.json()
+   if (data.results && data.results.length > 0) {
+    const details = data.results[0].components
+    console.log('🚀 ~ fetchLocationDetails ~ details:', details)
+
+    setValues((prevState) => ({
+     ...prevState,
+     country: prevState.country || details.country,
+     state: prevState.state || details.state,
+     city: prevState.city || details.state_district,
+     pinCode: details.postcode,
+    }))
+   } else {
+    console.error('Unable to retrieve location details.')
+   }
+  } catch (error) {
+   console.error('Error fetching location details.', error)
+  }
+ }
+
  const handleChange = (e) => {
   setValues({
    ...values,
@@ -69,9 +120,21 @@ const BusinessLocation = () => {
  const handleSubmit = async (e) => {
   e.preventDefault()
   const tempErrors = validate()
+  let coords = ''
+  if (navigator.geolocation) {
+   navigator.geolocation.getCurrentPosition(
+    (position) => {
+     coords = position.coords
+    },
+    (error) => {
+     console.error(error)
+    }
+   )
+  } else {
+   console.error('Geolocation is not supported by this browser.')
+  }
   setErrors(tempErrors)
   if (Object.keys(tempErrors).length === 0) {
-   // Handle form submission
    try {
     const postData = {
      address: values.address,
@@ -80,24 +143,14 @@ const BusinessLocation = () => {
      city: values.city,
      pincode: values.pinCode,
      user_id: localStorage.getItem('user_id'),
+     coords: coords,
     }
-    console.log('postdata', postData)
     const response = await api.post('/user_address_info.php', postData)
     if (response?.data?.status?.success) {
-     if (response?.data?.status?.description == 'info_added') {
-      MySwal.fire({
-       icon: 'success',
-       text: 'User Information Added',
-      }).then(() => {
-       navigate('/registration/business-contact')
-      })
-     } else if (response?.data?.status?.description == 'info_updated') {
-      MySwal.fire({
-       icon: 'success',
-       text: 'User Information Updated',
-      }).then(() => {
-       navigate('/registration/business-contact')
-      })
+     if (response?.data?.status?.description === 'info_added') {
+      navigate('/registration/business-contact')
+     } else if (response?.data?.status?.description === 'info_updated') {
+      navigate('/registration/business-contact')
      }
     } else {
      console.error('Unable to store User Information :', response.data.message)

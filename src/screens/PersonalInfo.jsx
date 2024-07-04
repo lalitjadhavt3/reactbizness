@@ -125,19 +125,9 @@ const PersonalInfo = () => {
 
     if (response?.data?.status?.success) {
      if (response?.data?.status?.description == 'info_added') {
-      MySwal.fire({
-       icon: 'success',
-       text: 'User Information Added',
-      }).then(() => {
-       navigate('/registration/business-info')
-      })
+      navigate('/registration/business-info')
      } else if (response?.data?.status?.description == 'info_updated') {
-      MySwal.fire({
-       icon: 'success',
-       text: 'User Information Updated',
-      }).then(() => {
-       navigate('/registration/business-info')
-      })
+      navigate('/registration/business-info')
      }
     } else {
      console.error('Unable to store User Information :', response.data.message)

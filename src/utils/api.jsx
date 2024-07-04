@@ -1,9 +1,10 @@
 import axios from 'axios'
-const ENV = 'prod'
+const ENV = 'dev'
+export const geolocationapikey = 'e25b4c09da3846c381e8cf5f8ed50185'
 const baseURL =
  ENV === 'prod' ? 'https://biznessshelter.in/biznessapi/api/' : 'http://localhost/bizness/api/'
 const api = axios.create({
- baseURL: 'http://localhost/bizness/api/', // Replace with your API URL
+ baseURL: baseURL, // Replace with your API URL
  headers: {
   'Content-Type': 'application/json',
  },

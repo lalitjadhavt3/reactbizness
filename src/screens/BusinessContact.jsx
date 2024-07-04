@@ -99,19 +99,9 @@ const BusinessContact = () => {
    const response = await api.post('/user_contact_info.php', postData)
    if (response?.data?.status?.success) {
     if (response?.data?.status?.description == 'info_added') {
-     MySwal.fire({
-      icon: 'success',
-      title: 'User Information Added',
-     }).then(() => {
-      navigate('/registration/business-upi')
-     })
+     navigate('/registration/business-upi')
     } else if (response?.data?.status?.description == 'info_updated') {
-     MySwal.fire({
-      icon: 'success',
-      title: 'User Information Updated',
-     }).then(() => {
-      navigate('/registration/business-upi')
-     })
+     navigate('/registration/business-upi')
     }
    } else {
     console.error('Unable to store User Information :', response.data.message)

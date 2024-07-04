@@ -1,5 +1,13 @@
 import React, {useState, useEffect} from 'react'
-import {FormControl, InputLabel, OutlinedInput, Select, MenuItem} from '@mui/material'
+import {
+ FormControl,
+ InputLabel,
+ OutlinedInput,
+ Select,
+ MenuItem,
+ Autocomplete,
+ TextField,
+} from '@mui/material'
 import CustomButton from '../components/CustomButton'
 import '../styles/register.css'
 import {useNavigate} from 'react-router-dom'
@@ -10,6 +18,7 @@ import Swal from 'sweetalert2'
 const BusinessInfo = () => {
  const navigate = useNavigate()
  const MySwal = withReactContent(Swal)
+ const [businessCategories, setBusinessCategories] = useState([])
 
  const [values, setValues] = useState({
   businessName: '',
@@ -56,7 +65,20 @@ const BusinessInfo = () => {
     }).then(() => {})
    }
   }
+  const fetchCategories = async () => {
+   try {
+    const response = await api.get('/get_categories.php')
+    console.log('🚀 ~ fetchCategories ~ catData:', response?.data?.data)
+
+    const catData = response?.data?.data.map((item) => item.category_name)
+
+    setBusinessCategories(catData)
+   } catch (error) {
+    console.error('Error fetching categories:', error)
+   }
+  }
   checkBusinessInfo()
+  fetchCategories()
  }, [])
 
  const handleChange = (e) => {
@@ -65,7 +87,12 @@ const BusinessInfo = () => {
    [e.target.name]: e.target.value,
   })
  }
-
+ const handleCategoryChange = (event, newValue) => {
+  setValues({
+   ...values,
+   businessCategory: newValue || event.target.value,
+  })
+ }
  const validate = () => {
   let tempErrors = {}
   if (!values.businessName) tempErrors.businessName = 'Business name is required'
@@ -94,20 +121,10 @@ const BusinessInfo = () => {
     if (response?.data?.status?.success) {
      if (response?.data?.status?.description == 'info_added') {
       localStorage.setItem('businessName', values.businessName)
-      MySwal.fire({
-       icon: 'success',
-       text: 'User Information Added',
-      }).then(() => {
-       navigate('/registration/business-location')
-      })
+      navigate('/registration/business-location')
      } else if (response?.data?.status?.description == 'info_updated') {
       localStorage.setItem('businessName', values.businessName)
-      MySwal.fire({
-       icon: 'success',
-       text: 'User Information Updated',
-      }).then(() => {
-       navigate('/registration/business-location')
-      })
+      navigate('/registration/business-location')
      }
     } else {
      console.error('Unable to store User Information :', response.data.message)
@@ -185,15 +202,27 @@ const BusinessInfo = () => {
        className='formCustomControls personal-info-form'
        error={!!errors.businessCategory}
       >
-       <OutlinedInput
-        id='outlined-adornment-businessCategory'
-        type='text'
-        name='businessCategory'
+       <Autocomplete
+        freeSolo
+        options={businessCategories}
         value={values.businessCategory}
-        onChange={handleChange}
-        required
+        onChange={handleCategoryChange}
+        onInputChange={(event, newInputValue) => {
+         setValues({...values, businessCategory: newInputValue})
+        }}
+        renderInput={(params) => (
+         <TextField
+          {...params}
+          id='outlined-adornment-businessCategory'
+          name='businessCategory'
+          value={values.businessCategory}
+          onChange={handleCategoryChange}
+          required
+          error={!!errors.businessCategory}
+          helperText={errors.businessCategory}
+         />
+        )}
        />
-       {errors.businessCategory && <div className='error-message'>{errors.businessCategory}</div>}
       </FormControl>
 
       <label htmlFor='businessWebsite' className='formLabelBusinessInfo'>

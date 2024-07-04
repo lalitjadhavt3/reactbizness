@@ -23,14 +23,19 @@ const Profile_Views = () => {
     // console.log('🚀 ~buttonName:', buttonNames)
 
     setCallTabs(response?.data?.data)
-    const shareProfileTab = response?.data?.data.find(
-     (tab) => tab.url && tab.url.includes('/shareProfile/')
-    )
+    console.log('🚀 ~ fetchTabs ~ response:', response?.data)
+    if (response?.data?.data?.length > 0) {
+     const shareProfileTab = response?.data?.data.find(
+      (tab) => tab.url && tab.url.includes('/shareProfile/')
+     )
 
-    if (shareProfileTab) {
-     setShareTabData(shareProfileTab)
+     if (shareProfileTab) {
+      setShareTabData(shareProfileTab)
+     } else {
+      console.log('No shareProfile tab found.')
+     }
     } else {
-     console.log('No shareProfile tab found.')
+     console.error('Data Not found')
     }
    } catch (error) {
     console.error('Login failed:', error)
