@@ -4,7 +4,8 @@ import {IoMdEye, IoMdEyeOff} from 'react-icons/io'
 import CustomButton from '../components/CustomButton'
 import GoogleIcon from '../assets/icons/GoogleIcon'
 import {useNavigate} from 'react-router-dom'
-
+import {colors} from '../utils/CommonStyles'
+import GoogleSignIn from '../utils/GoogleSignIn'
 const Login = () => {
  const [showPassword, setShowPassword] = useState(false)
  const navigate = useNavigate()
@@ -12,7 +13,17 @@ const Login = () => {
  const handleClickShowPassword = () => {
   setShowPassword(!showPassword)
  }
+ const handleGoogleSignInSuccess = (response) => {
+  const profileObj = response.profileObj // Access user profile data
+  console.log('🚀 ~ handleGoogleSignInSuccess ~ profileObj:', profileObj)
 
+  // Send the profileObj to your backend to authenticate the user
+  // and fetch additional data if needed
+ }
+
+ const handleGoogleSignInError = (error) => {
+  console.error('Error during Google Sign-In:', error)
+ }
  return (
   <Container maxWidth='sm'>
    <Box
@@ -50,7 +61,7 @@ const Login = () => {
        btnText='Login'
        iconPosition='start'
        btnType='submit'
-       btnStyle={{borderRadius: '7px'}}
+       btnStyle={{backgroundColor: colors.primaryBtnBg}}
       />
      </Box>
      <Box mt={2} textAlign='center'>
@@ -73,7 +84,7 @@ const Login = () => {
        display: 'flex',
        justifyContent: 'flex-start',
        alignContent: 'center',
-       borderRadius: '7px',
+
        borderWidth: '1',
       }}
      />
