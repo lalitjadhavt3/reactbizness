@@ -20,6 +20,7 @@ import BusinessTimings from '../screens/BusinessTimings'
 import LocationFetcher from '../screens/LocationFetcher'
 import RegisterUser from '../screens/RegisterUser'
 import Login from '../screens/Login'
+import AccountCreated from '../screens/AccountCreated'
 // ... other imports
 
 const NavigationRouter = () => {
@@ -40,7 +41,7 @@ const NavigationRouter = () => {
    <Route path='/registration/business-upi' element={<BusinessUpi />} />
    <Route path='/registration/business-timings' element={<BusinessTimings />} />
    <Route path='/registration/business-locationDetect' element={<LocationFetcher />} />
-
+   <Route path='/account-created' element={<AccountCreated />} />
    {/* Protected routes */}
    <Route
     path='/'

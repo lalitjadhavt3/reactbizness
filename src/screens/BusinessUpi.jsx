@@ -8,6 +8,8 @@ import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
 import api from '../utils/api'
 import {useNavigate} from 'react-router-dom'
+import NavigationHeader from '../components/NavigationHeader'
+import Stepper from '../components/Stepper'
 const BusinessUpi = () => {
  const MySwal = withReactContent(Swal)
  const navigate = useNavigate()
@@ -76,13 +78,7 @@ const BusinessUpi = () => {
      navigate('/registration/business-upi')
     } else if (response?.data?.status?.description == 'info_updated') {
      if (response?.data?.status?.message == 'user_registration_success') {
-      MySwal.fire({
-       icon: 'success',
-       title: 'Registration Completed',
-       text: 'Kindly Login to View Business Profile!',
-      }).then(() => {
-       navigate('/login')
-      })
+      navigate('/account-created')
      }
     }
    } else {
@@ -188,8 +184,10 @@ const BusinessUpi = () => {
  return (
   <div className='container'>
    <div className='register-box'>
+    <NavigationHeader currentStep={5} />
     <div>
      <h4>Business Contact Information</h4>
+     <Stepper currentStep={5} totalSteps={5} />
      <label style={{fontSize: 14, marginTop: '3%'}}>Fill In Your Business Contact Details.</label>
     </div>
     <form onSubmit={handleSubmit}>

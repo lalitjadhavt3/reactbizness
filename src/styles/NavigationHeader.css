@@ -1,0 +1,14 @@
+.navigation-header {
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px 0px;
+    margin-bottom: 5%;
+  }
+  
+  .nav-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  

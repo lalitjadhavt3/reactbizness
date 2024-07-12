@@ -1,5 +1,5 @@
 import axios from 'axios'
-const ENV = 'dev'
+const ENV = 'prod'
 export const geolocationapikey = 'e25b4c09da3846c381e8cf5f8ed50185'
 const baseURL =
  ENV === 'prod' ? 'https://biznessshelter.in/biznessapi/api/' : 'http://localhost/bizness/api/'

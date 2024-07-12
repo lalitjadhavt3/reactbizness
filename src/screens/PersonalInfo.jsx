@@ -17,9 +17,13 @@ import {useNavigate} from 'react-router-dom'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import api from '../utils/api'
+import Stepper from '../components/Stepper'
+import NavigationHeader from '../components/NavigationHeader'
 
 const PersonalInfo = () => {
  const MySwal = withReactContent(Swal)
+ const [currentStep, setCurrentStep] = useState(1)
+ const totalSteps = 5
 
  const [values, setValues] = useState({
   name: '',
@@ -144,9 +148,12 @@ const PersonalInfo = () => {
  return (
   <div className='container'>
    <div className='register-box'>
+    <NavigationHeader currentStep={currentStep} />
     <div>
      <h4>Personal Information</h4>
-     <label style={{fontSize: 14, marginTop: '3%'}}>
+     <Stepper currentStep={currentStep} totalSteps={totalSteps} />
+
+     <label style={{fontSize: 14, marginTop: '5%'}}>
       Fill In Your Personal Details to Register Your Business.
      </label>
     </div>

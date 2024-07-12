@@ -14,6 +14,9 @@ import {useNavigate} from 'react-router-dom'
 import api from '../utils/api'
 import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
+import Stepper from '../components/Stepper'
+import Header from '../components/Header'
+import NavigationHeader from '../components/NavigationHeader'
 
 const BusinessInfo = () => {
  const navigate = useNavigate()
@@ -27,6 +30,8 @@ const BusinessInfo = () => {
   businessWebsite: '',
  })
  const [errors, setErrors] = useState({})
+ const [currentStep, setCurrentStep] = useState(2)
+ const totalSteps = 5
  const [businessTypes, setBusinessTypes] = useState([
   'Sole Proprietorship Firm',
   'Partnership Firms',
@@ -141,6 +146,8 @@ const BusinessInfo = () => {
  return (
   <div className='container'>
    <div className='register-box'>
+    <NavigationHeader currentStep={currentStep} />
+    <Stepper totalSteps={totalSteps} currentStep={currentStep} />
     <div>
      <h4>Business Information</h4>
      <label style={{fontSize: 14, marginTop: '3%'}}>Fill In Your Business Details.</label>

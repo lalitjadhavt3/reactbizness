@@ -6,6 +6,8 @@ import {useNavigate} from 'react-router-dom'
 import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
 import api, {geolocationapikey} from '../utils/api'
+import Stepper from '../components/Stepper'
+import NavigationHeader from '../components/NavigationHeader'
 
 const BusinessLocation = () => {
  const navigate = useNavigate()
@@ -170,8 +172,10 @@ const BusinessLocation = () => {
     </div>
    ) : (
     <div className='register-box'>
+     <NavigationHeader currentStep={3} />
      <div>
       <h4>Business Contact Information</h4>
+      <Stepper currentStep={3} totalSteps={5} />
       <label style={{fontSize: 14, marginTop: '3%'}}>Fill In Your Business Contact Details.</label>
      </div>
      <form onSubmit={handleSubmit}>

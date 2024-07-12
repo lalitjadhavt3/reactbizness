@@ -1,0 +1,18 @@
+.account-created-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #fff; /* Light blue background */
+  }
+  
+  .success-gif {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px; /* Space between GIF and button */
+    border-radius:4%
+  }
+  
+
+  

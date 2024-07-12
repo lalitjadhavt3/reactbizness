@@ -19,6 +19,8 @@ import api from '../utils/api'
 import {useNavigate} from 'react-router-dom'
 import OtpInput from '../components/OtpInput'
 import CustomButton from '../components/CustomButton'
+import NavigationHeader from '../components/NavigationHeader'
+import Stepper from '../components/Stepper'
 
 const BusinessContact = () => {
  const MySwal = withReactContent(Swal)
@@ -238,8 +240,10 @@ const BusinessContact = () => {
  return (
   <div className='container'>
    <div className='register-box'>
+    <NavigationHeader currentStep={4} />
     <div>
      <h4>Business Contact Information</h4>
+     <Stepper currentStep={4} totalSteps={5} />
      <label style={{fontSize: 14, marginTop: '3%'}}>Fill In Your Business Contact Details.</label>
     </div>
     <form onSubmit={handleSubmit}>
