@@ -115,7 +115,7 @@ const BusinessUpi = () => {
   }
  }
 
- const handleVerifyOtp = async () => {
+ const handleVerifyUpi = async () => {
   // Mock function to simulate OTP verification
   // Replace with actual API call
   if (values?.upiId.length > 5) {
@@ -215,7 +215,8 @@ const BusinessUpi = () => {
          logoIcon={null}
          iconPosition={'start'}
          btnType={'button'}
-         onClick={handleVerifyOtp}
+         onClick={handleVerifyUpi}
+         btnStyle={{backgroundColor: 'black'}}
         />
        </div>
       )}
@@ -226,6 +227,8 @@ const BusinessUpi = () => {
         iconPosition={'start'}
         btnType={'submit'}
         disabled={!isUpiVerified}
+        btnStyle={{backgroundColor: 'black', width: 'unset'}}
+        divStyle={{justifyContent: 'end', display: 'flex'}}
        />
       </div>
      </div>

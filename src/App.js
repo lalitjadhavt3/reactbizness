@@ -3,6 +3,7 @@ import './App.css'
 import {ThemeProvider, createTheme} from '@mui/material/styles'
 import NavigationRouter from './navigation/routes'
 import {AuthProvider} from './context/AuthContext'
+import SplashScreen from './screens/SplashScreen'
 
 // Create a custom theme with adorned element background color
 const theme = createTheme({
@@ -66,6 +67,7 @@ function App() {
  return (
   <AuthProvider>
    <ThemeProvider theme={theme}>
+    <SplashScreen />
     <NavigationRouter />
    </ThemeProvider>
   </AuthProvider>

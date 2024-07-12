@@ -152,7 +152,13 @@ const BusinessTimings = ({user_id}) => {
        </div>
       ))}
       <div className='button-box'>
-       <CustomButton btnText='Save Timings' logoIcon={null} iconPosition='start' btnType='submit' />
+       <CustomButton
+        btnText='Save Timings'
+        logoIcon={null}
+        iconPosition='start'
+        btnType='submit'
+        btnStyle={{backgroundColor: 'black'}}
+       />
       </div>
      </div>
     </form>

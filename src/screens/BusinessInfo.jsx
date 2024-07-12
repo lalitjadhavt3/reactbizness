@@ -244,7 +244,13 @@ const BusinessInfo = () => {
       </FormControl>
      </div>
      <div className='button-box'>
-      <CustomButton btnText={'Next'} logoIcon={null} iconPosition={'start'} btnType={'submit'} />
+      <CustomButton
+       btnText={'Next'}
+       logoIcon={null}
+       iconPosition={'start'}
+       btnType={'submit'}
+       btnStyle={{backgroundColor: 'black'}}
+      />
      </div>
     </form>
    </div>

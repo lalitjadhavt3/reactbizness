@@ -20,41 +20,80 @@ import BusinessTimings from '../screens/BusinessTimings'
 import LocationFetcher from '../screens/LocationFetcher'
 import RegisterUser from '../screens/RegisterUser'
 import Login from '../screens/Login'
+// ... other imports
+
 const NavigationRouter = () => {
- const {isAuthenticated} = useAuth() // Access isAuthenticated from AuthContext
+ const {isAuthenticated} = useAuth()
 
  return (
-  <>
-   {isAuthenticated ? (
-    <Routes>
-     <Route path='/' element={<ProfileViews />} />
-     <Route path='*' element={<NotFound />} />
-     <Route path='/login' element={<SignIn />} />
-     <Route path='/register' element={<Register />} />
-     <Route path='/forgotPassword' element={<ForgotPassword />} />
-     <Route path='/editProfile/:id' element={<EditProfile />} />
-     <Route path='/account' element={<ProfileViews />} />
-     <Route path='/pricing' element={<Pricing />} />
-     <Route path='/analytics' element={<Analytics />} />
-     <Route path='/profile' element={<ProfileViews />} />
-    </Routes>
-   ) : (
-    <Routes>
-     <Route path='/' element={<Login />} />
-     <Route path='*' element={<NotFound />} />
-     <Route path='/login' element={<Login />} />
-     <Route path='/register' element={<RegisterUser />} />
-     <Route path='/forgotPassword' element={<ForgotPassword />} />
-     <Route path='/registration/personal-info' element={<PersonalInfo />} />
-     <Route path='/registration/business-info' element={<BusinessInfo />} />
-     <Route path='/registration/business-location' element={<BusinessLocation />} />
-     <Route path='/registration/business-contact' element={<BusinessContact />} />
-     <Route path='/registration/business-upi' element={<BusinessUpi />} />
-     <Route path='/registration/business-timings' element={<BusinessTimings />} />
-     <Route path='/registration/business-locationDetect' element={<LocationFetcher />} />
-    </Routes>
-   )}
-  </>
+  <Routes>
+   {/* Public routes */}
+   <Route path='/login' element={isAuthenticated ? <Navigate to='/' /> : <Login />} />
+   <Route path='/register' element={isAuthenticated ? <Navigate to='/' /> : <RegisterUser />} />
+   <Route path='/forgotPassword' element={<ForgotPassword />} />
+
+   {/* Registration routes */}
+   <Route path='/registration/personal-info' element={<PersonalInfo />} />
+   <Route path='/registration/business-info' element={<BusinessInfo />} />
+   <Route path='/registration/business-location' element={<BusinessLocation />} />
+   <Route path='/registration/business-contact' element={<BusinessContact />} />
+   <Route path='/registration/business-upi' element={<BusinessUpi />} />
+   <Route path='/registration/business-timings' element={<BusinessTimings />} />
+   <Route path='/registration/business-locationDetect' element={<LocationFetcher />} />
+
+   {/* Protected routes */}
+   <Route
+    path='/'
+    element={
+     <AuthCheck>
+      <ProfileViews />
+     </AuthCheck>
+    }
+   />
+   <Route
+    path='/editProfile/:id'
+    element={
+     <AuthCheck>
+      <EditProfile />
+     </AuthCheck>
+    }
+   />
+   <Route
+    path='/account'
+    element={
+     <AuthCheck>
+      <ProfileViews />
+     </AuthCheck>
+    }
+   />
+   <Route
+    path='/pricing'
+    element={
+     <AuthCheck>
+      <Pricing />
+     </AuthCheck>
+    }
+   />
+   <Route
+    path='/analytics'
+    element={
+     <AuthCheck>
+      <Analytics />
+     </AuthCheck>
+    }
+   />
+   <Route
+    path='/profile'
+    element={
+     <AuthCheck>
+      <ProfileViews />
+     </AuthCheck>
+    }
+   />
+
+   {/* Catch-all route */}
+   <Route path='*' element={<NotFound />} />
+  </Routes>
  )
 }
 

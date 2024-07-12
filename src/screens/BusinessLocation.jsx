@@ -10,7 +10,7 @@ import api, {geolocationapikey} from '../utils/api'
 const BusinessLocation = () => {
  const navigate = useNavigate()
  const MySwal = withReactContent(Swal)
-
+ const [coords, setCoords] = useState()
  const [values, setValues] = useState({
   address: '',
   country: '',
@@ -20,7 +20,7 @@ const BusinessLocation = () => {
  })
  const [errors, setErrors] = useState('')
  const [geolocationFetched, setGeolocationFetched] = useState(false)
-
+ const [loading, setLoading] = useState(true)
  useEffect(() => {
   const checkBusinessInfo = async () => {
    try {
@@ -31,6 +31,11 @@ const BusinessLocation = () => {
     const response = await api.post('/get_user_details_with_page.php', postData)
 
     if (response?.data?.status?.description) {
+     setLoading(true)
+
+     fetchGeolocation()
+
+     setLoading(false)
      const {business_address, business_country, business_area, business_state, business_pincode} =
       response?.data?.data?.user_info
      setValues({
@@ -44,10 +49,15 @@ const BusinessLocation = () => {
 
      // Fetch geolocation only if some fields are missing
      if (!business_country || !business_state || !business_area || !business_pincode) {
+      setLoading(true)
+
       fetchGeolocation()
+
+      setLoading(false)
      }
     }
    } catch (error) {
+    setLoading(false)
     MySwal.fire({
      icon: 'error',
      text: 'ERR-1001 Login failed, Please contact administrator',
@@ -63,6 +73,7 @@ const BusinessLocation = () => {
    navigator.geolocation.getCurrentPosition(
     (position) => {
      const {latitude, longitude} = position.coords
+     setCoords(position?.coords)
      fetchLocationDetails(latitude, longitude)
     },
     (error) => {
@@ -120,19 +131,6 @@ const BusinessLocation = () => {
  const handleSubmit = async (e) => {
   e.preventDefault()
   const tempErrors = validate()
-  let coords = ''
-  if (navigator.geolocation) {
-   navigator.geolocation.getCurrentPosition(
-    (position) => {
-     coords = position.coords
-    },
-    (error) => {
-     console.error(error)
-    }
-   )
-  } else {
-   console.error('Geolocation is not supported by this browser.')
-  }
   setErrors(tempErrors)
   if (Object.keys(tempErrors).length === 0) {
    try {
@@ -166,113 +164,125 @@ const BusinessLocation = () => {
 
  return (
   <div className='container'>
-   <div className='register-box'>
-    <div>
-     <h4>Business Contact Information</h4>
-     <label style={{fontSize: 14, marginTop: '3%'}}>Fill In Your Business Contact Details.</label>
+   {loading ? (
+    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: 500}}>
+     <label>Fetching location</label>
     </div>
-    <form onSubmit={handleSubmit}>
-     <div className='form-box form-card'>
-      <label htmlFor='address' className='formLabelBusinessInfo'>
-       Address
-      </label>
-      <FormControl
-       variant='outlined'
-       className='formCustomControls personal-info-form'
-       error={!!errors.address}
-      >
-       <OutlinedInput
-        id='outlined-adornment-address'
-        type='text'
-        name='address'
-        value={values.address}
-        onChange={handleChange}
-        required
-       />
-       {errors.address && <div className='error-message'>{errors.address}</div>}
-      </FormControl>
-
-      <label htmlFor='Country' className='formLabelBusinessInfo'>
-       Country
-      </label>
-      <FormControl
-       variant='outlined'
-       className='formCustomControls personal-info-form'
-       error={!!errors.country}
-      >
-       <OutlinedInput
-        id='outlined-adornment-Country'
-        type='text'
-        name='country'
-        value={values.country}
-        onChange={handleChange}
-        required
-       />
-       {errors.country && <div className='error-message'>{errors.country}</div>}
-      </FormControl>
-
-      <label htmlFor='state' className='formLabelBusinessInfo'>
-       State
-      </label>
-      <FormControl
-       variant='outlined'
-       className='formCustomControls personal-info-form'
-       error={!!errors.state}
-      >
-       <OutlinedInput
-        id='outlined-adornment-state'
-        type='text'
-        name='state'
-        value={values.state}
-        onChange={handleChange}
-        required
-       />
-       {errors.state && <div className='error-message'>{errors.state}</div>}
-      </FormControl>
-
-      <label htmlFor='city' className='formLabelBusinessInfo'>
-       City
-      </label>
-      <FormControl
-       variant='outlined'
-       className='formCustomControls personal-info-form'
-       error={!!errors.city}
-      >
-       <OutlinedInput
-        id='outlined-adornment-city'
-        type='text'
-        name='city'
-        value={values.city}
-        onChange={handleChange}
-        required
-       />
-       {errors.city && <div className='error-message'>{errors.city}</div>}
-      </FormControl>
-
-      <label htmlFor='pinCode' className='formLabelBusinessInfo'>
-       Pin Code
-      </label>
-      <FormControl
-       variant='outlined'
-       className='formCustomControls personal-info-form'
-       error={!!errors.pinCode}
-      >
-       <OutlinedInput
-        id='outlined-adornment-pinCode'
-        type='text'
-        name='pinCode'
-        value={values.pinCode}
-        onChange={handleChange}
-        required
-       />
-       {errors.pinCode && <div className='error-message'>{errors.pinCode}</div>}
-      </FormControl>
+   ) : (
+    <div className='register-box'>
+     <div>
+      <h4>Business Contact Information</h4>
+      <label style={{fontSize: 14, marginTop: '3%'}}>Fill In Your Business Contact Details.</label>
      </div>
-     <div className='button-box'>
-      <CustomButton btnText={'Next'} logoIcon={null} iconPosition={'start'} btnType={'submit'} />
-     </div>
-    </form>
-   </div>
+     <form onSubmit={handleSubmit}>
+      <div className='form-box form-card'>
+       <label htmlFor='address' className='formLabelBusinessInfo'>
+        Address
+       </label>
+       <FormControl
+        variant='outlined'
+        className='formCustomControls personal-info-form'
+        error={!!errors.address}
+       >
+        <OutlinedInput
+         id='outlined-adornment-address'
+         type='text'
+         name='address'
+         value={values.address}
+         onChange={handleChange}
+         required
+        />
+        {errors.address && <div className='error-message'>{errors.address}</div>}
+       </FormControl>
+
+       <label htmlFor='Country' className='formLabelBusinessInfo'>
+        Country
+       </label>
+       <FormControl
+        variant='outlined'
+        className='formCustomControls personal-info-form'
+        error={!!errors.country}
+       >
+        <OutlinedInput
+         id='outlined-adornment-Country'
+         type='text'
+         name='country'
+         value={values.country}
+         onChange={handleChange}
+         required
+        />
+        {errors.country && <div className='error-message'>{errors.country}</div>}
+       </FormControl>
+
+       <label htmlFor='state' className='formLabelBusinessInfo'>
+        State
+       </label>
+       <FormControl
+        variant='outlined'
+        className='formCustomControls personal-info-form'
+        error={!!errors.state}
+       >
+        <OutlinedInput
+         id='outlined-adornment-state'
+         type='text'
+         name='state'
+         value={values.state}
+         onChange={handleChange}
+         required
+        />
+        {errors.state && <div className='error-message'>{errors.state}</div>}
+       </FormControl>
+
+       <label htmlFor='city' className='formLabelBusinessInfo'>
+        City
+       </label>
+       <FormControl
+        variant='outlined'
+        className='formCustomControls personal-info-form'
+        error={!!errors.city}
+       >
+        <OutlinedInput
+         id='outlined-adornment-city'
+         type='text'
+         name='city'
+         value={values.city}
+         onChange={handleChange}
+         required
+        />
+        {errors.city && <div className='error-message'>{errors.city}</div>}
+       </FormControl>
+
+       <label htmlFor='pinCode' className='formLabelBusinessInfo'>
+        Pin Code
+       </label>
+       <FormControl
+        variant='outlined'
+        className='formCustomControls personal-info-form'
+        error={!!errors.pinCode}
+       >
+        <OutlinedInput
+         id='outlined-adornment-pinCode'
+         type='text'
+         name='pinCode'
+         value={values.pinCode}
+         onChange={handleChange}
+         required
+        />
+        {errors.pinCode && <div className='error-message'>{errors.pinCode}</div>}
+       </FormControl>
+      </div>
+      <div className='button-box'>
+       <CustomButton
+        btnText={'Next'}
+        logoIcon={null}
+        iconPosition={'start'}
+        btnType={'submit'}
+        btnStyle={{backgroundColor: 'black'}}
+       />
+      </div>
+     </form>
+    </div>
+   )}
   </div>
  )
 }

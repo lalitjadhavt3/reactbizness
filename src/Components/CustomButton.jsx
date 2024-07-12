@@ -11,9 +11,10 @@ const CustomButton = ({
  btnType,
  disabled,
  props,
+ divStyle,
 }) => {
  return (
-  <div className='btn-box'>
+  <div className='btn-box' style={divStyle}>
    <Button
     variant='contained'
     disabled={disabled}

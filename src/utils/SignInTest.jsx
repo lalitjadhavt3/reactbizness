@@ -1,15 +1,97 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import {GoogleOAuthProvider, GoogleLogin} from '@react-oauth/google'
 import {jwtDecode} from 'jwt-decode'
 import {useAuth} from '../context/AuthContext'
+import api from './api'
+import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2'
 
-function SignInTest({user, setUser, navigate}) {
- const {userRegistrationDataFromGoogle, setUserRegistrationDataFromGoogle} = useAuth()
+function SignInTest({user, setUser, navigate, accType, action}) {
+ const {setAuthStatus, userRegistrationDataFromGoogle, setUserRegistrationDataFromGoogle} =
+  useAuth()
+ const MySwal = withReactContent(Swal)
 
- const handleGoogleSuccess = (credentialResponse) => {
+ const handleGoogleSuccess = async (credentialResponse) => {
   const decoded = jwtDecode(credentialResponse.credential)
   setUserRegistrationDataFromGoogle(decoded)
-  navigate('/registration/personal-info')
+  if (action == 'login') {
+   try {
+    const postData = {
+     username: decoded?.email,
+     password: decoded?.sub,
+    }
+
+    const response = await api.post('/login.php', postData)
+    if (response.data.success) {
+     if (response?.data?.user_basic_info) {
+      localStorage.setItem('access_token', response.data.access_token)
+      localStorage.setItem('refresh_token', response.data.refresh_token)
+      localStorage.setItem('username', response.data.username)
+      localStorage.setItem('user_id', response.data.user_id)
+      setAuthStatus(true)
+      MySwal.fire({
+       icon: 'success',
+       title: 'Logged in Successfully !',
+      }).then(() => {
+       navigate('/')
+      })
+     } else {
+      localStorage.removeItem('access_token')
+      localStorage.removeItem('refresh_token')
+      localStorage.removeItem('username')
+      localStorage.removeItem('user_id')
+      localStorage.setItem('user_id', response.data.user_id)
+      MySwal.fire({
+       icon: 'info',
+       title: 'Please fill basic information to proceed',
+      }).then(() => {
+       navigate(`/registration/${response?.data?.redirect_page}`)
+      })
+     }
+
+     // Optionally, redirect or update UI to indicate successful login
+    }
+   } catch (error) {
+    MySwal.fire({
+     icon: 'error',
+     title: 'ERR-1001 Login failed, Please contact administrator',
+    })
+   }
+  } else {
+   if (accType === '' || accType === null) {
+    MySwal.fire({
+     icon: 'error',
+     title: 'Please select account type',
+    })
+   } else {
+    try {
+     const response = await api.post('/user_register.php', {
+      password: decoded?.sub,
+      confirm_password: decoded?.sub,
+      account_type: accType,
+      email: decoded?.email,
+     })
+     if (response?.data?.status?.message === 'registration_success') {
+      MySwal.fire({
+       icon: 'success',
+       title: 'Registration Successful',
+      }).then(() => {
+       navigate('/login')
+      })
+     } else {
+      MySwal.fire({
+       icon: 'error',
+       title: response.data.message || 'Registration failed, please try again',
+      })
+     }
+    } catch (error) {
+     MySwal.fire({
+      icon: 'error',
+      title: 'An error occurred. Please try again later.',
+     })
+    }
+   }
+  }
  }
 
  return (

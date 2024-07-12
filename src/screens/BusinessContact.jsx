@@ -1,6 +1,15 @@
-import React, {useEffect, useState} from 'react'
-import {FormControl, InputLabel, OutlinedInput, InputAdornment, TextField} from '@mui/material'
-import CustomButton from '../components/CustomButton'
+import React, {useEffect, useState, useRef} from 'react'
+import {
+ FormControl,
+ TextField,
+ Modal,
+ Box,
+ Typography,
+ Button,
+ InputAdornment,
+ IconButton,
+ Drawer,
+} from '@mui/material'
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
 import '../styles/register.css'
@@ -8,8 +17,9 @@ import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
 import api from '../utils/api'
 import {useNavigate} from 'react-router-dom'
-import OtpVerify from './OtpVerify'
 import OtpInput from '../components/OtpInput'
+import CustomButton from '../components/CustomButton'
+
 const BusinessContact = () => {
  const MySwal = withReactContent(Swal)
  const navigate = useNavigate()
@@ -21,10 +31,28 @@ const BusinessContact = () => {
   otp: '',
   existing: '',
  })
+ const otpRefs = useRef([])
 
  const [errors, setErrors] = useState({})
  const [isOtpSent, setIsOtpSent] = useState(false)
  const [isOtpVerified, setIsOtpVerified] = useState(false)
+ const [openModal, setOpenModal] = useState(false)
+ const [otpDrawerOpen, setOtpDrawerOpen] = useState(false)
+ const handleOtpChange = (index, value) => {
+  const newOtp = values.otp.split('')
+  newOtp[index] = value
+  const newOtpString = newOtp.join('')
+  setValues({...values, otp: newOtpString})
+
+  // Move to next input if value is entered and not the last input
+  if (value && index < 5) {
+   otpRefs.current[index + 1].focus()
+  }
+ }
+
+ useEffect(() => {
+  otpRefs.current = otpRefs.current.slice(0, 6)
+ }, [])
  useEffect(() => {
   const checkBusinessInfo = async () => {
    try {
@@ -56,6 +84,7 @@ const BusinessContact = () => {
   }
   checkBusinessInfo()
  }, [])
+
  const handleChange = (e) => {
   const {name, value} = e.target
   if (name === 'otp') {
@@ -81,6 +110,7 @@ const BusinessContact = () => {
   if (!values.otp && isOtpSent) tempErrors.otp = 'OTP is required'
   return tempErrors
  }
+
  const submitValues = async (values) => {
   if (!values?.existing) {
    navigate('/registration/business-upi')
@@ -98,9 +128,9 @@ const BusinessContact = () => {
    console.log('🚀 ~ submitValues ~ postData:', postData)
    const response = await api.post('/user_contact_info.php', postData)
    if (response?.data?.status?.success) {
-    if (response?.data?.status?.description == 'info_added') {
+    if (response?.data?.status?.description === 'info_added') {
      navigate('/registration/business-upi')
-    } else if (response?.data?.status?.description == 'info_updated') {
+    } else if (response?.data?.status?.description === 'info_updated') {
      navigate('/registration/business-upi')
     }
    } else {
@@ -113,6 +143,7 @@ const BusinessContact = () => {
    })
   }
  }
+
  const handleSendOtp = async () => {
   // Mock function to simulate OTP sending
   // Replace with actual API call
@@ -128,7 +159,6 @@ const BusinessContact = () => {
    if (response?.data?.success) {
     MySwal.fire({
      icon: 'success',
-     //title: 'OTP Sent to ' + values.mobileNumber,
      text: 'OTP Sent to ' + values.mobileNumber,
     }).then(() => {
      const userTempData = {
@@ -138,6 +168,7 @@ const BusinessContact = () => {
      }
      localStorage.setItem('user_temp_data', JSON.stringify(userTempData))
      setIsOtpSent(true)
+     setOtpDrawerOpen(true)
     })
    }
   } else {
@@ -160,7 +191,9 @@ const BusinessContact = () => {
    MySwal.fire({
     icon: 'success',
     title: 'OTP Verified',
-   }).then(() => {})
+   }).then(() => {
+    setOtpDrawerOpen(false)
+   })
   } else {
    MySwal.fire({
     icon: 'error',
@@ -177,19 +210,15 @@ const BusinessContact = () => {
 
    if (
     values?.isWhatsApp &&
-    (values?.whatsappNumber == '' || values?.whatsappNumber == undefined)
+    (values?.whatsappNumber === '' || values?.whatsappNumber === undefined)
    ) {
     submitValues(values)
    } else if (
     Object.keys(tempErrors).length === 0 &&
     !values?.isWhatsApp &&
-    values?.whatsappNumber != undefined
+    values?.whatsappNumber !== undefined
    ) {
     submitValues(values)
-
-    // Handle form submission
-    // Assuming you want to make an API call here using Axios
-    // Replace with actual Axios API call
    } else {
     MySwal.fire({
      icon: 'error',
@@ -282,24 +311,54 @@ const BusinessContact = () => {
          className='formCustomControls personal-info-form'
          error={!!errors.otp}
         >
-         <OtpInput
-          value={values.otp}
-          onChange={(e) => handleChange({target: {name: 'otp', value: e.target.value}})}
-         />
-         {errors.otp && <div className='error-message'>{errors.otp}</div>}
+         <Button variant='contained' color='primary' onClick={() => setOtpDrawerOpen(true)}>
+          Enter OTP
+         </Button>
         </FormControl>
 
-        {!isOtpVerified && (
-         <div className='button-box'>
-          <CustomButton
-           btnText='Verify OTP'
-           logoIcon={null}
-           iconPosition='start'
-           btnType='button'
-           onClick={handleVerifyOtp}
-          />
-         </div>
-        )}
+        <Drawer anchor='bottom' open={otpDrawerOpen} onClose={() => setOtpDrawerOpen(false)}>
+         <Box sx={{p: 2}}>
+          <Typography variant='h6' sx={{textAlign: 'center', mb: 2}}>
+           Enter OTP
+          </Typography>
+          <Box sx={{display: 'flex', justifyContent: 'center', gap: 1}}>
+           {[0, 1, 2, 3, 4, 5].map((index) => (
+            <TextField
+             key={index}
+             variant='outlined'
+             size='small'
+             type='text'
+             inputProps={{
+              maxLength: 1,
+              style: {
+               textAlign: 'center',
+               fontSize: '1.5rem',
+              },
+             }}
+             inputRef={(el) => (otpRefs.current[index] = el)}
+             value={values.otp[index] || ''}
+             onChange={(e) => handleOtpChange(index, e.target.value)}
+             onKeyDown={(e) => {
+              if (e.key === 'Backspace' && !e.target.value && index > 0) {
+               otpRefs.current[index - 1].focus()
+              }
+             }}
+            />
+           ))}
+          </Box>
+          <Box sx={{display: 'flex', justifyContent: 'center', mt: 2}}>
+           <CustomButton
+            btnText={'Verify OTP'}
+            logoIcon={null}
+            iconPosition={'start'}
+            btnType={'submit'}
+            btnStyle={{backgroundColor: 'black', width: 'unset'}}
+            onClick={handleVerifyOtp}
+            divStyle={{justifyContent: 'center', display: 'flex'}}
+           />
+          </Box>
+         </Box>
+        </Drawer>
        </>
       )}
       {!isOtpSent && (
@@ -309,7 +368,9 @@ const BusinessContact = () => {
          logoIcon={null}
          iconPosition={'start'}
          btnType={'button'}
+         btnStyle={{backgroundColor: 'black', width: 'unset'}}
          onClick={handleSendOtp}
+         divStyle={{justifyContent: 'end', display: 'flex'}}
         />
        </div>
       )}
@@ -328,33 +389,15 @@ const BusinessContact = () => {
       </FormControl>
       {errors.email && <div className='error-message'>{errors.email}</div>}
 
-      {/* <label htmlFor='email' className='formLabelBusinessInfo'>
-       Email
-      </label>
-      <FormControl
-       variant='outlined'
-       className='formCustomControls personal-info-form'
-       error={!!errors.email}
-      >
-       <InputLabel htmlFor='outlined-adornment-email'>Email</InputLabel>
-       <OutlinedInput
-        id='outlined-adornment-email'
-        type='email'
-        label='Email'
-        name='email'
-        value={values.email}
-        onChange={handleChange}
-        required
-       />
-      </FormControl> */}
-
       <div className='button-box'>
        <CustomButton
         btnText={'Next'}
+        disabled={!isOtpVerified && !values.existing}
         logoIcon={null}
         iconPosition={'start'}
         btnType={'submit'}
-        disabled={!isOtpVerified && !values.existing}
+        btnStyle={{backgroundColor: 'black', width: 'unset'}}
+        divStyle={{justifyContent: 'end', display: 'flex'}}
        />
       </div>
      </div>
