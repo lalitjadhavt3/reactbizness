@@ -115,38 +115,6 @@ const Signup = () => {
   }
  }
 
- const handleGoogleSignInSuccess = async (tokenResponse) => {
-  const user = jwtDecode(tokenResponse.credential)
-  signIn(user)
-
-  try {
-   const response = await api.post('/user_register.php', {
-    action: 'google_login',
-    google_id: user.sub,
-    email: user.email,
-   })
-
-   if (response.data.message === 'Login successful') {
-    MySwal.fire({
-     icon: 'success',
-     title: 'Login Successful',
-    }).then(() => {
-     navigate('/') // Redirect to home or any other page after sign-in
-    })
-   } else {
-    MySwal.fire({
-     icon: 'error',
-     title: response.data.message || 'Login failed, please try again',
-    })
-   }
-  } catch (error) {
-   MySwal.fire({
-    icon: 'error',
-    title: 'An error occurred. Please try again later.',
-   })
-  }
- }
-
  return (
   <Container maxWidth='sm'>
    <form onSubmit={handleSubmit}>

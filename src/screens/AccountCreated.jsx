@@ -8,7 +8,7 @@ import animationData from '../assets/acc.json'
 const AccountCreated = () => {
  const navigate = useNavigate()
  const defaultOptions = {
-  loop: true,
+  loop: false,
   autoplay: true,
   animationData: animationData,
   rendererSettings: {

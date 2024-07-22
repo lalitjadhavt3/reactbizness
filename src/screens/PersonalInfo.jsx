@@ -264,7 +264,7 @@ const PersonalInfo = () => {
         }}
        >
         <MenuItem value=''>
-         <em>None</em>
+         <em>Select Gender</em>
         </MenuItem>
         <MenuItem key={0} value='male'>
          Male

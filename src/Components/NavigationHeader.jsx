@@ -19,13 +19,22 @@ const NavigationHeader = ({currentStep}) => {
  return (
   <div className='navigation-header'>
    {currentStep === 1 ? (
-    <button onClick={handleClose} className='nav-button'>
-     <CgClose />
-    </button>
+    <>
+     <button onClick={handleClose} className='nav-button close-button'>
+      <CgClose />
+     </button>
+     <div className='logo-container'>
+      <img src='/logos.png' alt='Logo' className='logo' />
+     </div>
+    </>
    ) : currentStep > 1 ? (
-    <button onClick={handleBack} className='nav-button'>
+    <button onClick={handleBack} className='nav-button back-button'>
      <BiLeftArrowAlt />
     </button>
+   ) : currentStep == 0 ? (
+    <div className='logo-container'>
+     <img src='/logos.png' alt='Logo' className='logo' />
+    </div>
    ) : null}
   </div>
  )

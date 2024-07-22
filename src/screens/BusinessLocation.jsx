@@ -148,9 +148,9 @@ const BusinessLocation = () => {
     const response = await api.post('/user_address_info.php', postData)
     if (response?.data?.status?.success) {
      if (response?.data?.status?.description === 'info_added') {
-      navigate('/registration/business-contact')
+      navigate('/registration/business-website')
      } else if (response?.data?.status?.description === 'info_updated') {
-      navigate('/registration/business-contact')
+      navigate('/registration/business-website')
      }
     } else {
      console.error('Unable to store User Information :', response.data.message)
@@ -174,7 +174,7 @@ const BusinessLocation = () => {
     <div className='register-box'>
      <NavigationHeader currentStep={3} />
      <div>
-      <h4>Business Contact Information</h4>
+      <h4>Business Location</h4>
       <Stepper currentStep={3} totalSteps={5} />
       <label style={{fontSize: 14, marginTop: '3%'}}>Fill In Your Business Contact Details.</label>
      </div>

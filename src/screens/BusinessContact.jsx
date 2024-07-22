@@ -331,7 +331,7 @@ const BusinessContact = () => {
              key={index}
              variant='outlined'
              size='small'
-             type='text'
+             type='number'
              inputProps={{
               maxLength: 1,
               style: {

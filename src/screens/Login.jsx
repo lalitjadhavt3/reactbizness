@@ -112,9 +112,31 @@ const Login = () => {
     minHeight='100vh'
    >
     <Box bgcolor='white' p={4} borderRadius={2} boxShadow={3} width='100%'>
-     <Typography variant='h4' component='h1' gutterBottom textAlign='center'>
-      Login
-     </Typography>
+     <div style={{textAlign: 'center'}}>
+      <img src='/logos.png' width={150} />
+      <Typography
+       variant='h4'
+       component='h1'
+       gutterBottom
+       textAlign='center'
+       marginRight={'4%'}
+       marginTop={'5%'}
+      >
+       Sign In
+      </Typography>
+      <Typography
+       variant='h7'
+       component='h5'
+       gutterBottom
+       textAlign='center'
+       marginRight={'4%'}
+       marginTop={'5%'}
+       fontSize={15}
+      >
+       Continue to Business Shelter
+      </Typography>
+     </div>
+
      <Box component='form' onSubmit={handleSubmit}>
       <TextField
        fullWidth

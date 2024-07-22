@@ -21,6 +21,9 @@ import LocationFetcher from '../screens/LocationFetcher'
 import RegisterUser from '../screens/RegisterUser'
 import Login from '../screens/Login'
 import AccountCreated from '../screens/AccountCreated'
+import AccType from '../screens/AccType'
+import BusinessCategory from '../screens/BusinessCategory'
+import BusinessWebsite from '../screens/BusinessWebsite'
 // ... other imports
 
 const NavigationRouter = () => {
@@ -36,11 +39,15 @@ const NavigationRouter = () => {
    {/* Registration routes */}
    <Route path='/registration/personal-info' element={<PersonalInfo />} />
    <Route path='/registration/business-info' element={<BusinessInfo />} />
+   <Route path='/registration/business-category' element={<BusinessCategory />} />
+   <Route path='/registration/business-website' element={<BusinessWebsite />} />
    <Route path='/registration/business-location' element={<BusinessLocation />} />
    <Route path='/registration/business-contact' element={<BusinessContact />} />
    <Route path='/registration/business-upi' element={<BusinessUpi />} />
    <Route path='/registration/business-timings' element={<BusinessTimings />} />
    <Route path='/registration/business-locationDetect' element={<LocationFetcher />} />
+   <Route path='/registration/acc-type' element={<AccType />} />
+
    <Route path='/account-created' element={<AccountCreated />} />
    {/* Protected routes */}
    <Route

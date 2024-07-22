@@ -6,9 +6,8 @@ import api from './api'
 import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
 
-function SignInTest({user, setUser, navigate, accType, action}) {
- const {setAuthStatus, userRegistrationDataFromGoogle, setUserRegistrationDataFromGoogle} =
-  useAuth()
+function SignInTest({user, navigate, action}) {
+ const {setAuthStatus, setUserRegistrationDataFromGoogle} = useAuth()
  const MySwal = withReactContent(Swal)
 
  const handleGoogleSuccess = async (credentialResponse) => {
@@ -50,6 +49,12 @@ function SignInTest({user, setUser, navigate, accType, action}) {
      }
 
      // Optionally, redirect or update UI to indicate successful login
+    } else {
+     console.error('Login failed:', response.data.message)
+     MySwal.fire({
+      icon: 'error',
+      title: response.data.message,
+     })
     }
    } catch (error) {
     MySwal.fire({
@@ -58,38 +63,37 @@ function SignInTest({user, setUser, navigate, accType, action}) {
     })
    }
   } else {
-   if (accType === '' || accType === null) {
-    MySwal.fire({
-     icon: 'error',
-     title: 'Please select account type',
+   try {
+    const response = await api.post('/user_register.php', {
+     password: decoded?.sub,
+     confirm_password: decoded?.sub,
+     email: decoded?.email,
     })
-   } else {
-    try {
-     const response = await api.post('/user_register.php', {
-      password: decoded?.sub,
-      confirm_password: decoded?.sub,
-      account_type: accType,
-      email: decoded?.email,
+    console.log('🚀 ~ handleGoogleSuccess ~ response:', response)
+
+    if (response?.data?.status?.message === 'registration_success') {
+     localStorage.removeItem('access_token')
+     localStorage.removeItem('refresh_token')
+     localStorage.removeItem('username')
+     localStorage.removeItem('user_id')
+     localStorage.setItem('user_id', response.data?.status?.user_id)
+     MySwal.fire({
+      icon: 'info',
+      title: 'Please fill basic information to proceed',
+     }).then(() => {
+      navigate(`/registration/${response?.data?.status?.redirect_page}`)
      })
-     if (response?.data?.status?.message === 'registration_success') {
-      MySwal.fire({
-       icon: 'success',
-       title: 'Registration Successful',
-      }).then(() => {
-       navigate('/login')
-      })
-     } else {
-      MySwal.fire({
-       icon: 'error',
-       title: response.data.message || 'Registration failed, please try again',
-      })
-     }
-    } catch (error) {
+    } else {
      MySwal.fire({
       icon: 'error',
-      title: 'An error occurred. Please try again later.',
+      title: response.data.message || 'Registration failed, please try again',
      })
     }
+   } catch (error) {
+    MySwal.fire({
+     icon: 'error',
+     title: 'An error occurred. Please try again later.',
+    })
    }
   }
  }
