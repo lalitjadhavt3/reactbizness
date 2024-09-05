@@ -111,7 +111,7 @@ const Login = () => {
     justifyContent='center'
     minHeight='100vh'
    >
-    <Box bgcolor='white' p={4} borderRadius={2} boxShadow={3} width='100%'>
+    <Box bgcolor='white' p={4} width='100%'>
      <div style={{textAlign: 'center'}}>
       <img src='/logos.png' width={150} />
       <Typography

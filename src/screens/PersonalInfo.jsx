@@ -153,15 +153,12 @@ const PersonalInfo = () => {
      <h4>Personal Information</h4>
      <Stepper currentStep={currentStep} totalSteps={totalSteps} />
 
-     <label style={{fontSize: 14, marginTop: '5%'}}>
-      Fill In Your Personal Details to Register Your Business.
+     <label style={{fontSize: 14, marginTop: '5%',}}>
+      Fill In Your Personal Information like Name, BirthDay and Gender to Register Your Business.
      </label>
     </div>
     <form onSubmit={handleSubmit}>
      <div className='form-box form-card'>
-      <label htmlFor='name' className='formLabel'>
-       Your Name
-      </label>
       <FormControl
        variant='outlined'
        className='formCustomControls personal-info-form'
@@ -181,9 +178,7 @@ const PersonalInfo = () => {
       </FormControl>
 
       <div className='formControl'>
-       <label htmlFor='dob' className='formLabel' style={{marginBottom: '5%'}}>
-        DOB
-       </label>
+      
        <div
         style={{
          justifyContent: 'space-between',
