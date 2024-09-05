@@ -1,16 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import logo from '../assets/logo.png'
-import {FaEye, FaEyeSlash} from 'react-icons/fa6'
 import '../styles/register.css'
-import {
- FormControl,
- IconButton,
- InputAdornment,
- InputLabel,
- OutlinedInput,
- Select,
- MenuItem,
-} from '@mui/material'
+import {FormControl, InputLabel, OutlinedInput, Select, MenuItem} from '@mui/material'
 import {MdOutlineVisibilityOff, MdVisibility} from 'react-icons/md'
 import CustomButton from '../components/CustomButton'
 import {useNavigate} from 'react-router-dom'
@@ -147,23 +137,20 @@ const PersonalInfo = () => {
 
  return (
   <div className='container'>
+   <NavigationHeader currentStep={currentStep} />
+
    <div className='register-box'>
-    <NavigationHeader currentStep={currentStep} />
     <div>
      <h4>Personal Information</h4>
      <Stepper currentStep={currentStep} totalSteps={totalSteps} />
 
-     <label style={{fontSize: 14, marginTop: '5%',}}>
+     <label style={{fontSize: 14, marginTop: '5%'}}>
       Fill In Your Personal Information like Name, BirthDay and Gender to Register Your Business.
      </label>
     </div>
     <form onSubmit={handleSubmit}>
-     <div className='form-box form-card'>
-      <FormControl
-       variant='outlined'
-       className='formCustomControls personal-info-form'
-       error={!!errors.name}
-      >
+     <div className='form-box form-card personal-info-overall-form'>
+      <FormControl variant='outlined' className='formCustomControls' error={!!errors.name}>
        <InputLabel htmlFor='outlined-adornment-name'>Name</InputLabel>
        <OutlinedInput
         id='outlined-adornment-name'
@@ -177,8 +164,7 @@ const PersonalInfo = () => {
        {errors.name && <span className='error-text'>{errors.name}</span>}
       </FormControl>
 
-      <div className='formControl'>
-      
+      <div className=' personal-info-form-inputs'>
        <div
         style={{
          justifyContent: 'space-between',
@@ -245,7 +231,7 @@ const PersonalInfo = () => {
        </div>
       </div>
 
-      <FormControl className='formControl' error={!!errors.gender}>
+      <FormControl className=' personal-info-form-inputs' error={!!errors.gender}>
        <label htmlFor='gender' className='formLabel'>
         Gender
        </label>
