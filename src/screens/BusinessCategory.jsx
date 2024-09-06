@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import {FormControl, Autocomplete, TextField} from '@mui/material'
+import {FormControl, Autocomplete, TextField, InputAdornment, InputLabel} from '@mui/material'
+import {MdBusiness} from 'react-icons/md' // Business icon for adornment
 import CustomButton from '../components/CustomButton'
 import '../styles/register.css'
 import {useNavigate} from 'react-router-dom'
@@ -51,7 +52,6 @@ const BusinessCategory = () => {
   const tempErrors = validate()
   setErrors(tempErrors)
   if (Object.keys(tempErrors).length === 0) {
-   // Handle form submission
    try {
     const postData = {
      businessCategory: values.businessCategory,
@@ -80,18 +80,17 @@ const BusinessCategory = () => {
 
  return (
   <div className='container'>
+   <NavigationHeader currentStep={currentStep} />
+
    <div className='register-box'>
-    <NavigationHeader currentStep={currentStep} />
-    <Stepper totalSteps={totalSteps} currentStep={currentStep} />
     <div>
      <h4>Business Category</h4>
-     <label style={{fontSize: 14, marginTop: '3%'}}>Select Your Business Category.</label>
+     <Stepper totalSteps={totalSteps} currentStep={currentStep} />
+
+     <label className='labelForForm'>Select Your Business Category.</label>
     </div>
     <form onSubmit={handleSubmit}>
      <div className='form-box form-card'>
-      <label htmlFor='businessCategory' className='formLabelBusinessInfo'>
-       Business Category
-      </label>
       <FormControl
        variant='outlined'
        className='formCustomControls personal-info-form'
@@ -110,11 +109,15 @@ const BusinessCategory = () => {
           {...params}
           id='outlined-adornment-businessCategory'
           name='businessCategory'
+          placeholder='Enter your business category'
           value={values.businessCategory}
           onChange={handleCategoryChange}
           required
           error={!!errors.businessCategory}
           helperText={errors.businessCategory}
+          InputProps={{
+           ...params.InputProps,
+          }}
          />
         )}
        />
@@ -126,7 +129,8 @@ const BusinessCategory = () => {
        logoIcon={null}
        iconPosition={'start'}
        btnType={'submit'}
-       btnStyle={{backgroundColor: 'black'}}
+       divStyle={{width: '95px', marginTop: '100px'}}
+       btnStyle={{backgroundColor: 'black', height: '45px'}}
       />
      </div>
     </form>

@@ -23,25 +23,21 @@ const BusinessLocation = () => {
  const [errors, setErrors] = useState('')
  const [geolocationFetched, setGeolocationFetched] = useState(false)
  const [loading, setLoading] = useState(true)
+
  useEffect(() => {
   const checkBusinessInfo = async () => {
    try {
-    const postData = {
-     user_id: localStorage.getItem('user_id'),
-    }
-
+    const postData = {user_id: localStorage.getItem('user_id')}
     const response = await api.post('/get_user_details_with_page.php', postData)
 
     if (response?.data?.status?.description) {
      setLoading(true)
-
      fetchGeolocation()
-
      setLoading(false)
+
      const {business_address, business_country, business_area, business_state, business_pincode} =
       response?.data?.data?.user_info
      setValues({
-      ...values,
       address: business_address,
       pinCode: business_pincode,
       city: business_area,
@@ -49,12 +45,9 @@ const BusinessLocation = () => {
       country: business_country,
      })
 
-     // Fetch geolocation only if some fields are missing
      if (!business_country || !business_state || !business_area || !business_pincode) {
       setLoading(true)
-
       fetchGeolocation()
-
       setLoading(false)
      }
     }
@@ -88,7 +81,7 @@ const BusinessLocation = () => {
  }
 
  const fetchLocationDetails = async (latitude, longitude) => {
-  const apiKey = geolocationapikey // Replace with your OpenCage API key
+  const apiKey = geolocationapikey
   const url = `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKey}`
 
   try {
@@ -96,7 +89,6 @@ const BusinessLocation = () => {
    const data = await response.json()
    if (data.results && data.results.length > 0) {
     const details = data.results[0].components
-    console.log('🚀 ~ fetchLocationDetails ~ details:', details)
 
     setValues((prevState) => ({
      ...prevState,
@@ -147,9 +139,10 @@ const BusinessLocation = () => {
     }
     const response = await api.post('/user_address_info.php', postData)
     if (response?.data?.status?.success) {
-     if (response?.data?.status?.description === 'info_added') {
-      navigate('/registration/business-website')
-     } else if (response?.data?.status?.description === 'info_updated') {
+     if (
+      response?.data?.status?.description === 'info_added' ||
+      response?.data?.status?.description === 'info_updated'
+     ) {
       navigate('/registration/business-website')
      }
     } else {
@@ -166,110 +159,111 @@ const BusinessLocation = () => {
 
  return (
   <div className='container'>
+   <NavigationHeader currentStep={3} />
+
    {loading ? (
     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: 500}}>
      <label>Fetching location</label>
     </div>
    ) : (
     <div className='register-box'>
-     <NavigationHeader currentStep={3} />
      <div>
       <h4>Business Location</h4>
       <Stepper currentStep={3} totalSteps={5} />
-      <label style={{fontSize: 14, marginTop: '3%'}}>Fill In Your Business Contact Details.</label>
+      <label className='labelForForm'>Fill In Your Business Contact Details.</label>
      </div>
      <form onSubmit={handleSubmit}>
       <div className='form-box form-card'>
-       <label htmlFor='address' className='formLabelBusinessInfo'>
-        Address
-       </label>
+       {/* Address Field */}
        <FormControl
         variant='outlined'
         className='formCustomControls personal-info-form'
         error={!!errors.address}
        >
+        <InputLabel htmlFor='outlined-adornment-address'>Address</InputLabel>
         <OutlinedInput
          id='outlined-adornment-address'
          type='text'
          name='address'
          value={values.address}
          onChange={handleChange}
+         label='Address'
          required
         />
         {errors.address && <div className='error-message'>{errors.address}</div>}
        </FormControl>
 
-       <label htmlFor='Country' className='formLabelBusinessInfo'>
-        Country
-       </label>
+       {/* Country Field */}
        <FormControl
         variant='outlined'
         className='formCustomControls personal-info-form'
         error={!!errors.country}
        >
+        <InputLabel htmlFor='outlined-adornment-country'>Country</InputLabel>
         <OutlinedInput
-         id='outlined-adornment-Country'
+         id='outlined-adornment-country'
          type='text'
          name='country'
          value={values.country}
          onChange={handleChange}
+         label='Country'
          required
         />
         {errors.country && <div className='error-message'>{errors.country}</div>}
        </FormControl>
 
-       <label htmlFor='state' className='formLabelBusinessInfo'>
-        State
-       </label>
+       {/* State Field */}
        <FormControl
         variant='outlined'
         className='formCustomControls personal-info-form'
         error={!!errors.state}
        >
+        <InputLabel htmlFor='outlined-adornment-state'>State</InputLabel>
         <OutlinedInput
          id='outlined-adornment-state'
          type='text'
          name='state'
          value={values.state}
          onChange={handleChange}
+         label='State'
          required
         />
         {errors.state && <div className='error-message'>{errors.state}</div>}
        </FormControl>
 
-       <label htmlFor='city' className='formLabelBusinessInfo'>
-        City
-       </label>
+       {/* City Field */}
        <FormControl
         variant='outlined'
         className='formCustomControls personal-info-form'
         error={!!errors.city}
        >
+        <InputLabel htmlFor='outlined-adornment-city'>City</InputLabel>
         <OutlinedInput
          id='outlined-adornment-city'
          type='text'
          name='city'
          value={values.city}
          onChange={handleChange}
+         label='City'
          required
         />
         {errors.city && <div className='error-message'>{errors.city}</div>}
        </FormControl>
 
-       <label htmlFor='pinCode' className='formLabelBusinessInfo'>
-        Pin Code
-       </label>
+       {/* Pin Code Field */}
        <FormControl
         variant='outlined'
         className='formCustomControls personal-info-form'
         error={!!errors.pinCode}
        >
+        <InputLabel htmlFor='outlined-adornment-pinCode'>Pin Code</InputLabel>
         <OutlinedInput
          id='outlined-adornment-pinCode'
          type='text'
          name='pinCode'
          value={values.pinCode}
          onChange={handleChange}
+         label='Pin Code'
          required
         />
         {errors.pinCode && <div className='error-message'>{errors.pinCode}</div>}
@@ -281,7 +275,8 @@ const BusinessLocation = () => {
         logoIcon={null}
         iconPosition={'start'}
         btnType={'submit'}
-        btnStyle={{backgroundColor: 'black'}}
+        divStyle={{width: '95px', marginTop: '100px'}}
+        btnStyle={{backgroundColor: 'black', height: '45px'}}
        />
       </div>
      </form>

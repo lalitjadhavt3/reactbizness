@@ -144,7 +144,7 @@ const PersonalInfo = () => {
      <h4>Personal Information</h4>
      <Stepper currentStep={currentStep} totalSteps={totalSteps} />
 
-     <label style={{fontSize: 14, marginTop: '5%'}}>
+     <label className='labelForForms'>
       Fill In Your Personal Information like Name, BirthDay and Gender to Register Your Business.
      </label>
     </div>
@@ -266,7 +266,8 @@ const PersonalInfo = () => {
        logoIcon={null}
        iconPosition={'start'}
        btnType={'submit'}
-       btnStyle={{backgroundColor: 'black'}}
+       divStyle={{width: '95px', marginTop: '100px'}}
+       btnStyle={{backgroundColor: 'black', height: '45px'}}
       />
      </div>
     </form>

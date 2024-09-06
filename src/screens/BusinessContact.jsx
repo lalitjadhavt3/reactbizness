@@ -9,6 +9,7 @@ import {
  InputAdornment,
  IconButton,
  Drawer,
+ InputLabel,
 } from '@mui/material'
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
@@ -239,12 +240,14 @@ const BusinessContact = () => {
 
  return (
   <div className='container'>
+   <NavigationHeader currentStep={4} />
+
    <div className='register-box'>
-    <NavigationHeader currentStep={4} />
     <div>
      <h4>Business Contact Information</h4>
      <Stepper currentStep={4} totalSteps={5} />
-     <label style={{fontSize: 14, marginTop: '3%'}}>Fill In Your Business Contact Details.</label>
+
+     <label className='labelForForms'>Fill In Your Business Contact Details.</label>
     </div>
     <form onSubmit={handleSubmit}>
      <div className='form-box form-card'>

@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react'
-import {FormControl, InputLabel, OutlinedInput, Select, MenuItem} from '@mui/material'
+import {
+ FormControl,
+ InputLabel,
+ OutlinedInput,
+ Select,
+ MenuItem,
+ InputAdornment,
+} from '@mui/material'
 import CustomButton from '../components/CustomButton'
 import '../styles/register.css'
 import {useNavigate} from 'react-router-dom'
@@ -46,13 +53,12 @@ const BusinessInfo = () => {
       businessType: business_type,
      })
      localStorage.setItem('businessName', business_name)
-     // Optionally, redirect or update UI to indicate successful login
     }
    } catch (error) {
     MySwal.fire({
      icon: 'error',
      text: 'ERR-1001 Login failed, Please contact administrator',
-    }).then(() => {})
+    })
    }
   }
   checkBusinessInfo()
@@ -78,7 +84,6 @@ const BusinessInfo = () => {
   const tempErrors = validate()
   setErrors(tempErrors)
   if (Object.keys(tempErrors).length === 0) {
-   // Handle form submission
    try {
     const postData = {
      businessName: values.businessName,
@@ -108,49 +113,50 @@ const BusinessInfo = () => {
 
  return (
   <div className='container'>
+   <NavigationHeader currentStep={currentStep} />
+
    <div className='register-box'>
-    <NavigationHeader currentStep={currentStep} />
-    <Stepper totalSteps={totalSteps} currentStep={currentStep} />
     <div>
      <h4>Business Information</h4>
-     <label style={{fontSize: 14, marginTop: '3%'}}>Fill In Your Business Details.</label>
+     <Stepper totalSteps={totalSteps} currentStep={currentStep} />
+
+     <label className='labelForForms'>Fill In Your Business Details.</label>
     </div>
     <form onSubmit={handleSubmit}>
      <div className='form-box form-card'>
-      <label htmlFor='businessName' className='formLabelBusinessInfo'>
-       Business Name
-      </label>
+      {/* Business Name Field with Adornment */}
       <FormControl
        variant='outlined'
-       className='formCustomControls personal-info-form'
+       className='formCustomControls  personal-info-form-inputs'
        error={!!errors.businessName}
       >
+       <InputLabel htmlFor='outlined-adornment-businessName'>Business Name</InputLabel>
        <OutlinedInput
         id='outlined-adornment-businessName'
         type='text'
         name='businessName'
         value={values.businessName}
         onChange={handleChange}
+        label='Business Name'
         required
        />
        {errors.businessName && <div className='error-message'>{errors.businessName}</div>}
       </FormControl>
 
-      <label htmlFor='businessType' className='formLabelBusinessInfo'>
-       Business Type
-      </label>
+      {/* Business Type Field with Adornment */}
       <FormControl
        variant='outlined'
-       className='formCustomControls personal-info-form'
+       className='formCustomControls  personal-info-form-inputs'
        error={!!errors.businessType}
       >
+       <InputLabel htmlFor='outlined-adornment-businessType'>Business Type</InputLabel>
        <Select
         id='outlined-adornment-businessType'
         name='businessType'
         value={values.businessType}
         onChange={handleChange}
+        label='Business Type'
         required
-        placeholder='Select Business Type'
        >
         <MenuItem>
          <em>None</em>
@@ -170,7 +176,8 @@ const BusinessInfo = () => {
        logoIcon={null}
        iconPosition={'start'}
        btnType={'submit'}
-       btnStyle={{backgroundColor: 'black'}}
+       divStyle={{width: '95px', marginTop: '100px'}}
+       btnStyle={{backgroundColor: 'black', height: '45px'}}
       />
      </div>
     </form>

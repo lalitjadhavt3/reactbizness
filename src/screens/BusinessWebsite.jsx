@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {FormControl, OutlinedInput} from '@mui/material'
+import {FormControl, InputLabel, OutlinedInput} from '@mui/material'
 import CustomButton from '../components/CustomButton'
 import '../styles/register.css'
 import {useNavigate} from 'react-router-dom'
@@ -50,7 +50,7 @@ const BusinessWebsite = () => {
       response?.data?.status?.description == 'info_updated'
      ) {
       localStorage.setItem('businessWebsite', values.businessWebsite)
-      navigate('/registration/business-contact') // Replace '/registration/next-step' with the actual next step route
+      navigate('/registration/business-contact') // Replace with the actual next step route
      }
     } else {
      console.error('Unable to store User Information :', response.data.message)
@@ -66,29 +66,33 @@ const BusinessWebsite = () => {
 
  return (
   <div className='container'>
+   <NavigationHeader currentStep={currentStep} />
+
    <div className='register-box'>
-    <NavigationHeader currentStep={currentStep} />
-    <Stepper totalSteps={totalSteps} currentStep={currentStep} />
     <div>
      <h4>Business Website</h4>
-     <label style={{fontSize: 14, marginTop: '3%'}}>Provide Your Business Website (if any).</label>
+     <Stepper totalSteps={totalSteps} currentStep={currentStep} />
+
+     <label className='labelForForm'>Provide Your Business Website (if any).</label>
     </div>
     <form onSubmit={handleSubmit}>
      <div className='form-box form-card'>
-      <label htmlFor='businessWebsite' className='formLabelBusinessInfo'>
-       Business Website (optional)
-      </label>
+      {/* Business Website Input */}
       <FormControl
        variant='outlined'
        className='formCustomControls personal-info-form'
        error={!!errors.businessWebsite}
       >
+       <InputLabel htmlFor='outlined-adornment-businessWebsite'>
+        Business Website (optional)
+       </InputLabel>
        <OutlinedInput
         id='outlined-adornment-businessWebsite'
         type='url'
         name='businessWebsite'
         value={values.businessWebsite}
         onChange={handleChange}
+        label='Business Website (optional)' // For Material-UI to display label properly inside input
        />
        {errors.businessWebsite && <div className='error-message'>{errors.businessWebsite}</div>}
       </FormControl>
@@ -99,7 +103,8 @@ const BusinessWebsite = () => {
        logoIcon={null}
        iconPosition={'start'}
        btnType={'submit'}
-       btnStyle={{backgroundColor: 'black'}}
+       divStyle={{width: '95px', marginTop: '100px'}}
+       btnStyle={{backgroundColor: 'black', height: '45px'}}
       />
      </div>
     </form>

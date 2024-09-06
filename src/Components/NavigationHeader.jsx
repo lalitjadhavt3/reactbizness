@@ -26,9 +26,11 @@ const NavigationHeader = ({currentStep}) => {
       </button>
      </>
     ) : currentStep > 1 ? (
-     <button onClick={handleBack} className='nav-button back-button'>
-      <BiLeftArrowAlt />
-     </button>
+     <>
+      <button onClick={handleBack} className='nav-button back-button'>
+       <BiLeftArrowAlt />
+      </button>
+     </>
     ) : currentStep == 0 ? (
      <div className='logo-container'>
       <img src='/logos.png' alt='Logo' className='logo' />
