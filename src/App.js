@@ -56,6 +56,7 @@ const theme = createTheme({
      backgroundColor: '#e8f0fe', // Change to your desired color
      padding: '0 8px', // Optional: add some padding
      borderRadius: '4px', // Optional: add border radius for better appearance
+     fontSize: '0.75rem',
     },
    },
   },

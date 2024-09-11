@@ -266,7 +266,7 @@ const PersonalInfo = () => {
        logoIcon={null}
        iconPosition={'start'}
        btnType={'submit'}
-       divStyle={{width: '95px', marginTop: '100px'}}
+       divStyle={{width: '95px', marginTop: '50px'}}
        btnStyle={{backgroundColor: 'black', height: '45px'}}
       />
      </div>
